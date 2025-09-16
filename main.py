@@ -1,4 +1,5 @@
 import asyncio
+import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import Message, WebAppInfo
 from aiogram.filters import CommandStart
@@ -6,11 +7,14 @@ from aiogram.filters import CommandStart
 # ===============================
 # CONFIG
 # ===============================
-API_TOKEN = "8474653813:AAGeUtzo0quMo9qLhn9vk5xzWGi5E4l5U60"  # Replace with your actual Telegram Bot token
-WEBAPP_URL = "https://a927eadfa197.ngrok-free.app/admin"  # Your Telegram mini app URL
+
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+WEBAPP_URL = os.getenv("WEBAPP_URL")
+
 
 # Initialize bot and dispatcher
-bot = Bot(token=API_TOKEN)
+bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 

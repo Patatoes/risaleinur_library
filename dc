@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+function dc(){
+    docker-compose -p risaleworld $@
+}
+
+dc $@
