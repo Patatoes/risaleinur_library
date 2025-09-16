@@ -11,6 +11,8 @@ from aiogram.filters import CommandStart
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 WEBAPP_URL = os.getenv("WEBAPP_URL")
+BOT_USERNAME = os.getenv("BOT_USERNAME")
+SITE_URL = os.getenv("SITE_URL")
 
 
 # Initialize bot and dispatcher
