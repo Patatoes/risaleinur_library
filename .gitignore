@@ -1,3 +1,12 @@
+app.db
+gdrive.db
+metadata.db
+books/
+*.log
+client_secrets.json
+config/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

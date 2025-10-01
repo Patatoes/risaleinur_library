@@ -1,0 +1,2701 @@
+[
+    {
+        "version": "8.11.1",
+        "date": "2025-09-26",
+        "new features": [
+            {
+                "type": "major",
+                "title": "E-book viewer: Add an \"Ask AI\" tab to the dictionary lookup panel. Allows you to query AI about the currently selected text.",
+                "description": "Supports hundreds of AI models via Providers such as Google, OpenRouter, GitHub and locally running models via Ollama. Many of them can be used free of charge. Note that this feature is completely optional and no AI related code is even loaded until you configure an AI provider."
+            },
+            {
+                "tickets": [
+                    2122257
+                ],
+                "title": "Preferences: Show the keyboard shortcut for each category in preferences in the tooltip"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2122747
+                ],
+                "title": "E-book viewer: Fix modifying an existing highlight causing duplicates to be created in some books"
+            },
+            {
+                "title": "E-book viewer: Fix very large e-books sometimes having a few non working links on Windows"
+            },
+            {
+                "tickets": [
+                    2123829
+                ],
+                "title": "PDB Input: Fix failure to convert some PDB files with sightly malformed headers"
+            },
+            {
+                "tickets": [
+                    2125438
+                ],
+                "title": "Fix error when trying to add the first icon rule to the Tag browser"
+            },
+            {
+                "tickets": [
+                    2041848
+                ],
+                "title": "E-book viewer: Fix Esc key not closing footnote popup when the popup has keyboard focus"
+            },
+            {
+                "title": "E-book viewer: Fix placement of selection handles in some books when modifying an existing highlight"
+            },
+            {
+                "title": "Windows build: Sign the .pyd DLLs in addition to the .dll DLLs"
+            },
+            {
+                "tickets": [
+                    2125742
+                ],
+                "title": "Windows: Fix regression in (8.11.0) causing conversion to be broken when metadata contains non-BMP characters"
+            }
+        ],
+        "improved recipes": [
+            "New York Times",
+            "Economist",
+            "El Diplo",
+            "New York Review of Books"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "8.10.0",
+        "date": "2025-09-05",
+        "new features": [
+            {
+                "title": "Book list: Allow controlling the tooltips displayed for every column using a template. Right click the column header and choose \"Define tooltip template\" to set the tooltip for that column"
+            },
+            {
+                "tickets": [
+                    2121304
+                ],
+                "title": "MTP driver: Allow creating format specific destinations for audiobook files"
+            },
+            {
+                "title": "Preferences->Keyboard: Allow searching by shortcut as well as by name"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2121737
+                ],
+                "title": "Kindle MTP driver: Fix APNX files being placed in incorrect location when books are sent to subfolders inside the root folder"
+            },
+            {
+                "tickets": [
+                    2121897
+                ],
+                "title": "E-book viewer: Read Aloud: Fix regression in previous release that broke changing voices when engine is set to 'Automatically select'"
+            },
+            {
+                "tickets": [
+                    2121701
+                ],
+                "title": "Fix a regression in the previous release that broke markdown output"
+            }
+        ],
+        "improved recipes": [
+            "Harvard Business Review",
+            "Outlook Magazine"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "8.9.0",
+        "date": "2025-08-22",
+        "new features": [
+            {
+                "tickets": [
+                    2109496
+                ],
+                "title": "Annotations browser: Add a color swatch in the results list to make seeing the type of highlight easier"
+            },
+            {
+                "tickets": [
+                    2117322
+                ],
+                "title": "Match books in library window: When doing the initial search using the title of the book on the device, if no matches are found remove trailing text in parentheses or after a colon and try again"
+            },
+            {
+                "tickets": [
+                    2118371
+                ],
+                "title": "When merging books via drag and drop show the cover of the target book"
+            },
+            {
+                "tickets": [
+                    2120726
+                ],
+                "title": "HTMLZ Output: Add support for embedded fonts"
+            },
+            {
+                "title": "Plugin installation window: Allow filtering available plugins by category"
+            },
+            {
+                "tickets": [
+                    2119557
+                ],
+                "title": "Fetch news: Add a sub-menu to the right click menu of the Fetch news button that shows recently downloaded news sources"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2099740
+                ],
+                "title": "Edit book: When pasting text from the clipboard ensure it is normalized to NFC form"
+            },
+            {
+                "tickets": [
+                    2109789
+                ],
+                "title": "Content server viewer: Improve the selection dialog for choosing a Text-to-speech voice"
+            },
+            {
+                "tickets": [
+                    2117412
+                ],
+                "title": "Content server: Fix an error when editing a book's metadata to change both the cover and another field"
+            }
+        ],
+        "improved recipes": [
+            "New York Times",
+            "Todoist",
+            "Tagespost"
+        ],
+        "new recipes": [
+            {
+                "title": "Startechery",
+                "author": "thekabistro"
+            }
+        ]
+    },
+    {
+        "version": "8.8.0",
+        "date": "2025-08-08",
+        "new features": [
+            {
+                "title": "E-book viewer: Improve display of Lookup results from Google"
+            },
+            {
+                "title": "Kobo driver: Add support for latest Tolino firmware"
+            },
+            {
+                "title": "Conversion: Handle -epub-text-emphasis properties used in some Japanese language EPUB books"
+            },
+            {
+                "tickets": [
+                    2117433
+                ],
+                "title": "Piper Neural text to speech engine: re-write the backend used to run the Piper speech models to no longer need an external binary for improved performance and robustness"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Edit book: Reports: Fix sorting by name of CSS rules"
+            },
+            {
+                "tickets": [
+                    2118744
+                ],
+                "title": "Fix template based custom column of tags type not being treated as multi valued when using it for similarity searches"
+            },
+            {
+                "title": "When adding books recursively do not try to import folder whose names named with an ebook file extension. These are, for example, generated by Apple Books"
+            },
+            {
+                "tickets": [
+                    2117255,
+                    2117336
+                ],
+                "title": "EPUB3 Output: Fix various issues with processing nav files when they contain more than just the Table of Contents and are not included in the spine."
+            }
+        ],
+        "improved recipes": [
+            "Economist",
+            "Press Information Bureau",
+            "Indian Express",
+            "Wall Street Journal",
+            "De Tijd",
+            "Washington Post"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "8.7.0",
+        "date": "2025-07-18",
+        "new features": [
+            {
+                "title": "Kindle driver: Add support for generating page number files (APNX) on 2024 and newer MTP based Kindles"
+            },
+            {
+                "tickets": [
+                    2116804
+                ],
+                "title": "When finding similar books by author ignore \"et al.\" suffix on author names"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2116864
+                ],
+                "title": "Fix a regression in the previous release that broke configuring Sending of books to device"
+            },
+            {
+                "tickets": [
+                    2117113
+                ],
+                "title": "Kobo driver: Fix a regression that caused ancient, pre-Touch kobo devices to no longer work with calibre"
+            },
+            {
+                "title": "MTP driver: Workaround for LibMTP no longer returning device serial numbers on some systems"
+            },
+            {
+                "title": "Edit book: Fix the next/previous buttons in the Text search tool not working"
+            },
+            {
+                "tickets": [
+                    2116065
+                ],
+                "title": "Fix series and publisher mapping rules not handling commas correctly when downloading metadata one book at a time"
+            },
+            {
+                "title": "Edit metadata dialog: When there are only a few custom comments like fields stretch them vertically to take up unused space"
+            }
+        ],
+        "improved recipes": [
+            "New York Magazine",
+            "World Archaeology",
+            "Minerva Magazine",
+            "Military History",
+            "Ancient Egypt"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "8.6.0",
+        "date": "2025-07-10",
+        "new features": [
+            {
+                "title": "Content server: Add a checkbox in content server user preferences to prevent a user account from changing its own password via the web interface"
+            },
+            {
+                "title": "Restoring database: Improve performance by an order of magnitude"
+            },
+            {
+                "title": "Add a tweak to Preferences->Tweaks to permit displaying the sort value for series in the Tag browser"
+            },
+            {
+                "title": "Welcome wizard: Change default output format to AZW3 for Kindle as MOBI is obsolete and all Kindles released within the last decade plus support AZW3"
+            },
+            {
+                "title": "Add 'Search \"not in\"' and 'Filter \"not in'\" buttons to Manage authors and Manage Items"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2115246
+                ],
+                "title": "Windows: Fix a regression in the previous release that caused terminal windows to popup momentarily when adding PDF files or converting them"
+            },
+            {
+                "tickets": [
+                    2115057
+                ],
+                "title": "E-book viewer: Fix a regression in 8.4 that broke fading of the background image"
+            },
+            {
+                "tickets": [
+                    2116006
+                ],
+                "title": "Tag browser: Fix clicking on categories to search for books by first letter of series not working correctly for non-English language books"
+            },
+            {
+                "tickets": [
+                    2115111
+                ],
+                "title": "Edit metadata individually: Ensure Next/Previous buttons work even if something re-orders the books in the book list. They will now iterate over the books as they were at the time the dialog is created"
+            },
+            {
+                "tickets": [
+                    2115084
+                ],
+                "title": "Windows: Generate catalog: Workaround for systems where a broken antivirus or similar holds open files in the catalog library causing a permission denied error"
+            }
+        ],
+        "improved recipes": [
+            "Economist",
+            "1843",
+            "Financial Times",
+            "PC World",
+            "Muy Interesante Mexico",
+            "Hindu Business Line",
+            "Business Standard",
+            "Hindustan Times",
+            "The Week",
+            "Times of India",
+            "Hindustan",
+            "Financial Times",
+            "Reason"
+        ],
+        "new recipes": [
+            {
+                "title": "La Presse",
+                "author": "quatorze"
+            }
+        ]
+    },
+    {
+        "version": "8.5.0",
+        "date": "2025-06-20",
+        "new features": [
+            {
+                "title": "The scrollbars used in calibre in light mode are now the same style as the ones in dark mode, this improves the contrast making the scrollbar more accessible"
+            },
+            {
+                "title": "Kobo driver: add an option to change how the Kobo displays series numbers using a template."
+            },
+            {
+                "tickets": [
+                    2112424
+                ],
+                "title": "Manage data files dialog: Add a button to cancel remaining books when managing multiple books"
+            },
+            {
+                "title": "Kobo driver: add support for new Tolino firmware"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2111559
+                ],
+                "title": "Prevent Windows 11 from starting a conhost.exe process for every calibre worker process"
+            },
+            {
+                "title": "E-book viewer: Improve highlight grouping with recurring chapter names"
+            },
+            {
+                "tickets": [
+                    2110400
+                ],
+                "title": "When sending emails to amazon and pocketbook use random English text instead of UUIDs for subject/body."
+            }
+        ],
+        "improved recipes": [
+            "NYTimes",
+            "WSJ",
+            "Financial Times",
+            "Eenadu",
+            "Fokus.se",
+            "Business standard",
+            "Go comics",
+            "NZ Herald",
+            "TLS Magazine"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "8.4.0",
+        "date": "2025-05-09",
+        "new features": [
+            {
+                "tickets": [
+                    2107778
+                ],
+                "title": "KEPUB Output: Add an option to generate KEPUB files that have better text justification at the cost of gaps in highlighting when used on the Kobo"
+            },
+            {
+                "title": "E-book viewer: Allow the background image specified in the Style section of the viewer preferences to extend under the page margins as well"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2110117
+                ],
+                "title": "E-book viewer: Fix a regression that broke the \"show book in main calibre program\" link"
+            },
+            {
+                "title": "News download: Fix Next/Previous links not working when the pointed to article failed to download"
+            },
+            {
+                "title": "E-book viewer: Handle links to missing internal files with an error popup rather than becoming non-functional"
+            },
+            {
+                "title": "E-book viewer: Fix some links not being processed correctly for very large EPUB files with many internal HTML files"
+            },
+            {
+                "title": "Get books: Update ebooks.com plugin for website changes"
+            },
+            {
+                "title": "Metadata review dialog: Fix merging of tags not working correctly"
+            },
+            {
+                "tickets": [
+                    2109755
+                ],
+                "title": "Wayland: Workaround Qt/Wayland bug that prevents the menu of the Layout button from showing"
+            },
+            {
+                "tickets": [
+                    2109612
+                ],
+                "title": "Prevent recursion when creating base temporary folder if something on system deletes the created temporary folder"
+            }
+        ],
+        "improved recipes": [
+            "NYTimes Book Review",
+            "Washington Post",
+            "tagesschau",
+            "Hindu",
+            "Economist",
+            "Economist Espresso"
+        ],
+        "new recipes": [
+            {
+                "title": "Frieze Magazine",
+                "author": "Kabonix"
+            }
+        ]
+    },
+    {
+        "version": "8.3.0",
+        "date": "2025-04-18",
+        "new features": [
+            {
+                "title": "Cover grid: Allow configuring different backgrounds for light and dark mode in Preferences->Look & feel->Cover grid"
+            },
+            {
+                "title": "E-book viewer: Further speedup first open of large EPUB files by another 30%"
+            },
+            {
+                "title": "Metadata review dialog: Add merge comments action"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Kobo driver: Fix viewing of KEPUB files from the device view in calibre not working"
+            },
+            {
+                "title": "Fix a regression in 8.1 that broke displaying of the debug log when running in debug mode"
+            },
+            {
+                "tickets": [
+                    2106280
+                ],
+                "title": "E-book viewer: Fix a regression in 8.0 that caused the clock to display an extra p after the time"
+            }
+        ],
+        "improved recipes": [
+            "GoComics",
+            "Internazionale",
+            "New York Times",
+            "SCMP",
+            "The Hindu",
+            "Barrons"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "8.2.1",
+        "date": "2025-04-04",
+        "new features": [
+            {
+                "title": "Kobo driver: Add support for new Tolino firmware"
+            },
+            {
+                "title": "Kindle driver: Allow using a value of * in Preferences->Output options->MOBI Output to have the driver mark all books sent to the device as personal documents"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Kobo driver: Fix hyphenation and extra CSS added to KEPUB files being ignored by the renderer on the Kobo"
+            },
+            {
+                "tickets": [
+                    2105884
+                ],
+                "title": "macOS: Fix opening book folder or PDF files for books with square brackets in the title not working"
+            },
+            {
+                "title": "Quickview: Fix a long standing bug with syncing of columns in the presence of hidden/re-ordered columns"
+            },
+            {
+                "tickets": [
+                    2104850
+                ],
+                "title": "E-book viewer: Show an error message when an invalid nearby search expression is used"
+            },
+            {
+                "tickets": [
+                    2105424
+                ],
+                "title": "KEPUB Output: Fix incorrect encoding detection for some HTML files without an encoding declaration"
+            },
+            {
+                "title": "macOS: Fix a regression in the previous release that caused failures in the E-book viewer when updating annotations for books with a large number of annotations"
+            },
+            {
+                "tickets": [
+                    2106205
+                ],
+                "title": "Version 8.2.1 fixes an error when clicking on format links in the book details panel"
+            }
+        ],
+        "improved recipes": [
+            "The Economist",
+            "Reuters",
+            "Private eye"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "8.1.1",
+        "date": "2025-03-28",
+        "new features": [
+            {
+                "tickets": [
+                    2103833
+                ],
+                "title": "Edit metadata dialog: Allow right clicking on the cover to edit it with an external program"
+            },
+            {
+                "tickets": [
+                    2104325
+                ],
+                "title": "Virtual library tabs: When the tabs are locked prevent them from being re-ordered as well"
+            },
+            {
+                "title": "FreeBSD: Add support for connecting to devices, contributed by Guido Falsi"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2103949
+                ],
+                "title": "macOS: Fix regression in previous release that caused calibre:// URLs to no longer work"
+            },
+            {
+                "tickets": [
+                    2103777
+                ],
+                "title": "macOS: Fix a regression in calibre 8 that prevented icons in menus from being rendered"
+            },
+            {
+                "title": "Kobo driver: Fix hyphenation settings not being applied correctly when generating KEPUB to put on the device"
+            },
+            {
+                "tickets": [
+                    2103926
+                ],
+                "title": "KEPUB Output: Include leading whitespace in kobo sentence span tags. This prevents unsightly breaks when highlighting across formatted text on the Kobo"
+            },
+            {
+                "tickets": [
+                    2103846
+                ],
+                "title": "Content server: Fix FB2 books not readable via the in-browser viewer"
+            },
+            {
+                "title": "Edit book: Add text narration: Fix preferred voice for language setting being ignored"
+            },
+            {
+                "tickets": [
+                    2103990
+                ],
+                "title": "E-book viewer: Use IPC to update annotations when calibre is running. Avoids possible loss of annotations in the Annotations browser due to db being locked"
+            },
+            {
+                "title": "Ensure calibre temp files are deleted even on program crash"
+            },
+            {
+                "tickets": [
+                    2103870
+                ],
+                "title": "Fix incorrect minimums on font size changing controls in viewer"
+            },
+            {
+                "title": "Fix regression in previous release causing incorrect rendering of layout menu on some macOS machines"
+            },
+            {
+                "tickets": [
+                    2100891
+                ],
+                "title": "Fix archive formats such as ZIP not being indexed for full text search"
+            },
+            {
+                "title": "Version 8.1.1 fixes a regression causing an error that does not affect functionality on startup on macOS"
+            }
+        ],
+        "improved recipes": [
+            "Horizons",
+            "Economist",
+            "Granta"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "8.0.1",
+        "date": "2025-03-21",
+        "new features": [
+            {
+                "type": "major",
+                "title": "Much improved Kobo support",
+                "description": "calibre can now natively edit, view and convert KEPUB format files used by the Kobo. It also automatically converts EPUB to KEPUB when sending books to Kobo devices (can be configured by right clicking the kobo icon in calibre)."
+            },
+            {
+                "type": "major",
+                "title": "Connect to folder: Allow connecting a specific device",
+                "description": "calibre can now connect to a folder and treat it as though it is a USBMS based device. This is useful particularly on Chromebooks where USB devices appear as folders rather than actual devices."
+            },
+            {
+                "tickets": [
+                    2099780
+                ],
+                "title": "When completing names for fields that contain hierarchical data in prefix mode match prefixes after every period"
+            },
+            {
+                "title": "ToC editor: Allow moving of multiple selected items in the Table of Contents"
+            },
+            {
+                "title": "macOS: The calibre application icons in the dock are now displayed in a white frame to follow Apple's current recommended icon style"
+            },
+            {
+                "title": "Kobo driver: Add support for new firmware on Tolino devices"
+            },
+            {
+                "title": "Book details: Add option in to suppress author search links"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Fix a regression that broke tabbing to edit cells in the book list when some columns have been hidden or re-ordered"
+            },
+            {
+                "title": "Catalog generation: Allow using templates that access the database for notes"
+            },
+            {
+                "title": "Fix a bug when renaming authors to a name with commas in it"
+            },
+            {
+                "tickets": [
+                    2100891
+                ],
+                "title": "Full text search: Also index text in ZIP and RAR archives as these can be viewed by the calibre viewer"
+            },
+            {
+                "tickets": [
+                    2099678
+                ],
+                "title": "E-book viewer: Fix Table of Contents current entry tracking not working for some books"
+            },
+            {
+                "title": "When reading metadata from HTML also recognize name=\"subject\" meta tags as calibre tags"
+            },
+            {
+                "tickets": [
+                    2099777
+                ],
+                "title": "E-book viewer: Fix viewer not closing on the interrupt signal"
+            },
+            {
+                "tickets": [
+                    2099754
+                ],
+                "title": "Edit book: Download external resources: Fix incorrect filename if the server returns a generic Content-Type header"
+            },
+            {
+                "tickets": [
+                    2098620
+                ],
+                "title": "Metadata download: Publisher/series transform rules: Fix values with commas in them not working"
+            },
+            {
+                "title": "Version 8.0.1 fixes a failure to start on systems where the user had previously installed the KoboTouchExtended plugin and disabled the builtin KoboTouch driver"
+            }
+        ],
+        "improved recipes": [
+            "Linux Weekly News",
+            "Spectator",
+            "Economist",
+            "Granta",
+            "Hindu",
+            "1843",
+            "Barrons",
+            "Frontline",
+            "Zaobao",
+            "Strange Horizons"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.26.0",
+        "date": "2025-02-14",
+        "new features": [
+            {
+                "title": "Allow specifying web search links that are used when clicking on item names in the Book details panel for custom columns via Preferences->Add your own columns"
+            },
+            {
+                "title": "Content server: When clicking on author names in the book details page perform the same action as clicking it in the calibre program's Book details panel"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2097677
+                ],
+                "title": "Fix a regression in 7.17 that caused various minor problems with editing metadata directly in the book list"
+            },
+            {
+                "title": "Fix a regression in the previous release that broke conversion using Heuristics and TXT input documents"
+            },
+            {
+                "tickets": [
+                    2097563
+                ],
+                "title": "E-book viewer: Fix header/footer text size too small when using multiple monitors and the primary monitors DPI is much less than secondary monitor DPI"
+            },
+            {
+                "tickets": [
+                    2097947
+                ],
+                "title": "Fix series mapping rules in the metadata preferences not working"
+            },
+            {
+                "tickets": [
+                    2098133
+                ],
+                "title": "Fix setting custom icon for category doesn't work"
+            },
+            {
+                "tickets": [
+                    2092732
+                ],
+                "title": "Kobo driver: Fix a regression that broke working with very old Kobo devices"
+            }
+        ],
+        "improved recipes": [
+            "Science Journals",
+            "Barrons"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.25.0",
+        "date": "2025-02-07",
+        "new features": [
+            {
+                "title": "Allow setting custom icons for items in the Tag browser by right clicking on them and choosing \"Manage icon for this value\""
+            },
+            {
+                "title": "Kindle driver: Allow import of KFX files from 2024 Kindles that use the MTP protocol"
+            },
+            {
+                "title": "A new tweak in Preferences->Tweaks to control the East Asian language used when transliterating to English"
+            },
+            {
+                "title": "Add an option to adjust the size of the link and note icons in Book details under Preferences->Look & feel->Book details"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2068527
+                ],
+                "title": "Nook driver: Fix the Glowlight 4 not working on Windows"
+            },
+            {
+                "title": "MTP driver: Fix Internal storage and SD card being swapped on some devices that have buggy firmware that assigns the SD card a lower id than the internal storage"
+            },
+            {
+                "tickets": [
+                    2096841
+                ],
+                "title": "Template dialog: Respect the tweak for title/series when editing save to disk and send to device templates"
+            },
+            {
+                "title": "Content server: Fix icons for individual formats not being shown in the Tag browser"
+            }
+        ],
+        "improved recipes": [
+            "spektrum.de",
+            "Economist",
+            "Arret sur images",
+            "Le Canard Enchaine",
+            "Foreign Affairs"
+        ],
+        "new recipes": [
+            {
+                "title": "Alternatives Economiques",
+                "author": "Kabonix"
+            },
+            {
+                "title": "Zerodeux",
+                "author": "Kabonix"
+            },
+            {
+                "title": "Afrique XXI",
+                "author": "Kabonix"
+            },
+            {
+                "title": "Orient XXI",
+                "author": "Kabonix"
+            },
+            {
+                "title": "Contretemps",
+                "author": "Kabonix"
+            },
+            {
+                "title": "Faz.net",
+                "author": "Anonymous"
+            },
+            {
+                "title": "Moview Web and Football League World",
+                "author": "SpicyPoison"
+            }
+        ]
+    },
+    {
+        "version": "7.24.0",
+        "date": "2025-01-10",
+        "new features": [
+            {
+                "tickets": [
+                    2091268
+                ],
+                "title": "Allow creating rules to transform series names in the Bulk metadata editor and Preferences->Metadata download"
+            },
+            {
+                "title": "Conversion: Automatically set the page progression direction for books that do not have it set and have their primary language either Arabic or Hebrew"
+            },
+            {
+                "title": "Content server: Book details view: Make calibre://show-book and calibre://view-book URLs in the comments work"
+            },
+            {
+                "tickets": [
+                    2092496
+                ],
+                "title": "Edit book: Spell check: Add a button to export the currently displayed list of words as a CSV file"
+            },
+            {
+                "tickets": [
+                    2092483
+                ],
+                "title": "Add from ISBN: Add a checkbox to automatically convert obsolete ISBN 10 to ISBN 13"
+            },
+            {
+                "tickets": [
+                    2092395
+                ],
+                "title": "Save single format to disk: Allow choosing the book cover as the format to save"
+            },
+            {
+                "title": "Option to show a button to access all available actions from the status bar in Preferences->Look & feel->Main interface"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2092948
+                ],
+                "title": "Read aloud: Fix no audio produced when text contains <3 and using the Windows legacy speech engine"
+            },
+            {
+                "tickets": [
+                    2092643
+                ],
+                "title": "Fix Tabbing while editing cells in the book list not always working"
+            },
+            {
+                "title": "Windows build: Also sign the portable launcher exes"
+            },
+            {
+                "tickets": [
+                    2092630
+                ],
+                "title": "Fix viewing books via the Cover browser not working when in device view"
+            }
+        ],
+        "improved recipes": [
+            "LWN Weekly",
+            "Outlook India",
+            "Livemint"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.23.0",
+        "date": "2024-12-20",
+        "new features": [
+            {
+                "title": "\ud83c\udf84 Happy holidays to everyone!"
+            },
+            {
+                "tickets": [
+                    2091646
+                ],
+                "title": "Content server: Allow managing the data files associated with a book by clicking the three dots in the top right corner of the book's page and choosing \"Manage data files\""
+            },
+            {
+                "tickets": [
+                    2091216
+                ],
+                "title": "Edit metadata dialog: Allow right clicking on the cover to view it in a popup window at larger size"
+            },
+            {
+                "title": "Add an option to expand the Tag browser tree to show the item that was current when the library was closed"
+            },
+            {
+                "title": "Add import and export stored template to Preferences / template functions"
+            },
+            {
+                "title": "Various Quality-of-Life improvements to the dialog used to edit columns with fixed sets of values"
+            },
+            {
+                "tickets": [
+                    2091152
+                ],
+                "title": "Resolve doi.org links when pasting identifiers"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2091451
+                ],
+                "title": "Viewer: Fix some HTMLZ files not opening on some systems"
+            },
+            {
+                "tickets": [
+                    2091542
+                ],
+                "title": "Amazon metadata plugin: Update for changed markup for some books on amazon search results page"
+            }
+        ],
+        "improved recipes": [
+            "Economist",
+            "Irish Times",
+            "Popular Science",
+            "ACM Queue"
+        ],
+        "new recipes": [
+            {
+                "title": "Le Canard Enchaine",
+                "author": "Kabonix"
+            }
+        ]
+    },
+    {
+        "version": "7.22.0",
+        "date": "2024-11-29",
+        "new features": [
+            {
+                "title": "E-book viewer: Read Aloud: Add an option to control the position of the popup control bar. It can now be placed along the top or bottom edges so as to overlap less with text."
+            },
+            {
+                "tickets": [
+                    2087754
+                ],
+                "title": "System tray menu: Add action to restart calibre"
+            },
+            {
+                "title": "Tolino driver: Support new firmware"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Windows: Enable popup OS notifications even when system tray icon is disabled to match behavior on other platforms. Notifications can be disabled via Preferences->Look & feel->Disable notifications on job completion"
+            },
+            {
+                "tickets": [
+                    2087850
+                ],
+                "title": "Fix a regression that caused incorrect English transliteration of Japanese text even when the UI language is set to Japanese"
+            },
+            {
+                "tickets": [
+                    2088153
+                ],
+                "title": "macOS: Dark mode: Fix a regression that caused the scrollbar to no longer be transient"
+            },
+            {
+                "tickets": [
+                    2089433
+                ],
+                "title": "DOCX Input: When some text has multiple footnotes insert a space between the consecutive foot note numbers so that they are distinct"
+            },
+            {
+                "title": "DOCX Input: Fix ToC nesting not working if the styles for the ToC levels do not use integer margins"
+            },
+            {
+                "title": "E-book viewer: Fix spurious chapter transition after configuring Read aloud"
+            },
+            {
+                "tickets": [
+                    2089436
+                ],
+                "title": "PDF Input: Fix reflow of lines in files with little text not working"
+            }
+        ],
+        "improved recipes": [
+            "Economist",
+            "Indian Express",
+            "Economist World Ahead",
+            "Frontline",
+            "Infobae"
+        ],
+        "new recipes": [
+            {
+                "title": "Economist News",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.21.0",
+        "date": "2024-11-08",
+        "new features": [
+            {
+                "type": "major",
+                "title": "Edit book: A new tool to create an audio overlay in EPUB files for all text using the Read aloud facility",
+                "description": "This allows readers of the book to listen to it with sentence tracking, even if they do not have a functioning text-to-speech system in the reading software. You can even assign different voices to different parts of the text for a more immersive experience. The tool is available from the Tools menu in the book editor."
+            },
+            {
+                "title": "Dark mode: make scrollbar more visible with higher contrast and rounded corners"
+            },
+            {
+                "title": "E-book viewer: In flow mode when scrolling across internal file boundaries using the mouse wheel/touchpad have a short half second pause to ease the transition. Can be controlled via the Scrolling section of the Viewer preferences."
+            },
+            {
+                "title": "ebook-meta.exe: Add an option to disallow rendered cover of first page for EPUB"
+            },
+            {
+                "tickets": [
+                    2082075
+                ],
+                "title": "Book details: Add an action to download the cover to the context menu when right clicking the cover"
+            },
+            {
+                "tickets": [
+                    2086609
+                ],
+                "title": "Read aloud: Add a restore defaults button to the configuration dialog"
+            },
+            {
+                "tickets": [
+                    2086478
+                ],
+                "title": "Auto adding: Allow excluding arbitrary file types not just known book file types"
+            },
+            {
+                "tickets": [
+                    2083583
+                ],
+                "title": "Edit metadata dialog: Add an action to open the book's folder to the context menu of the formats list"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2086571
+                ],
+                "title": "Read aloud: Fix only first 32000 characters per chapter being read"
+            },
+            {
+                "tickets": [
+                    2086661
+                ],
+                "title": "Content server: Read aloud: Fix clicking on a word to skip reading aloud to that word causing word highlighting to stop working"
+            },
+            {
+                "title": "Linux: Handle speech dispatcher with dummy output module and no voices more gracefully"
+            },
+            {
+                "title": "When renaming authors fix empty author folder not being removed if it contained file explorer metadata but was otherwise empty"
+            },
+            {
+                "tickets": [
+                    2086193
+                ],
+                "title": "Edit metadata dialog: Fix keyboard shortcuts to edit prev/next raising an error when trying to go beyond the first/last book"
+            },
+            {
+                "tickets": [
+                    2085576
+                ],
+                "title": "Linux: ToC Editor: Fix a regression in 7.17 that broke using the Create new entry button"
+            },
+            {
+                "tickets": [
+                    2085005
+                ],
+                "title": "Content server: Fix changing the language of a book not working for non-English user interface language and for books that have no existing language"
+            },
+            {
+                "title": "Linux: Read aloud with Piper: Fix audio not playing on some Linux systems"
+            },
+            {
+                "title": "Notes browser: When searching books search over all currently selected categories not just the last selected one"
+            }
+        ],
+        "improved recipes": [
+            "Substack",
+            "Live Mint",
+            "NYPost",
+            "Ars Technica",
+            "Indian Express",
+            "Reuters"
+        ],
+        "new recipes": [
+            {
+                "title": "Unz Review and Sonar21",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.20.0",
+        "date": "2024-10-18",
+        "new features": [
+            {
+                "type": "major",
+                "title": "PDF Input: Automatic header/footer detection and removal",
+                "description": "A new, dedicated PDF Input engine for calibre that implements automatic detection of headers and footers based on document analysis. The new engine is the default to go back to using the old engine, select it in the PDF Input section of the Conversion dialog."
+            },
+            {
+                "tickets": [
+                    2083058
+                ],
+                "title": "Read Aloud: Allow configuring an extra pause at the end of every sentence when using the Piper TTS engine"
+            },
+            {
+                "title": "PDF Output: Add _WIDTH_PIXELS_ and _HEIGHT_PIXELS_ variables to know the width and height of the header/footer area in templates"
+            },
+            {
+                "title": "Windows: Use calibre's bundled SSL certificates instead of the system certificate store by default",
+                "description": "Can be turned off via CALIBRE_USE_SYSTEM_CERTIFICATES=1 env var"
+            },
+            {
+                "title": "Trim image tool: Add a control to adjust aspect ratio"
+            },
+            {
+                "title": "Kobo driver: Add support for the new firmware used by the Tolino Shine 5"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Fix a regression in previous release that broke copying of book to another library if the books author does not exist in the destination database"
+            },
+            {
+                "title": "Read aloud: Piper backend: Fix not working with voices whose names have non-ASCII characters on Windows."
+            },
+            {
+                "title": "Content server: Fix book with non-ASCII filenames not downloading in the Kindle browser when using the /mobile view"
+            },
+            {
+                "title": "Content server: Fix embedding the server HTML inside a third party iframe causing an error"
+            }
+        ],
+        "improved recipes": [
+            "The Wire",
+            "Nikkei Asia Magazine",
+            "Swarajya",
+            "Mainichi",
+            "Nautilus",
+            "National Geographic",
+            "Science Journal",
+            "Times Literary Supplement",
+            "Saechsische Zeitung",
+            "India Today",
+            "Scientific American"
+        ],
+        "new recipes": [
+            {
+                "title": "NYT Magazine",
+                "author": "unkn0wn"
+            },
+            {
+                "title": "RedaktionsNetzwerk Deutschland",
+                "author": "epubli"
+            }
+        ]
+    },
+    {
+        "version": "7.19.0",
+        "date": "2024-09-27",
+        "new features": [
+            {
+                "type": "major",
+                "title": "E-book viewer: Halve the time taken to open large EPUB format books for the first time",
+                "description": "A four hundred thousand word EPUB book now opens in under a second on typical hardware."
+            },
+            {
+                "title": "PDF new engine: Improve header/footer detection"
+            },
+            {
+                "title": "For column icons and grid view emblems, support icons for both light and dark themes"
+            },
+            {
+                "title": "News downloads: Mark links to locally available articles with a middle-dot"
+            },
+            {
+                "tickets": [
+                    2079784
+                ],
+                "title": "When saving a layout also save the main window geometry"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2080705
+                ],
+                "title": "Windows: Read Aloud: Fix an occasional crash when stopping read aloud when using the legacy windows TTS engine"
+            },
+            {
+                "tickets": [
+                    2080705
+                ],
+                "title": "Windows: Read Aloud: Fix clicking in text to change what is being read causing tracking of currently read word to fail when using the legacy Windows TTS engine"
+            },
+            {
+                "tickets": [
+                    2080708
+                ],
+                "title": "Read aloud: Fix reading large numeric words causing text synchronization to fail when using some legacy TTS engines"
+            },
+            {
+                "tickets": [
+                    2080701
+                ],
+                "title": "EPUB3 metadata: Fix setting series number to zero not working"
+            },
+            {
+                "tickets": [
+                    2081982
+                ],
+                "title": "Comic Input: Handle comics whose internal files have control codes in their filenames"
+            },
+            {
+                "tickets": [
+                    2071348
+                ],
+                "title": "E-book viewer: Fix a regression that broke searching in Japanese books that use <ruby> text"
+            },
+            {
+                "tickets": [
+                    2080655
+                ],
+                "title": "E-book viewer: Fix a regression in the previous release that broke Read aloud for selected text"
+            },
+            {
+                "title": "Amazon metadata plugin: Workaround for downloads failing because Google discontinued its webcache"
+            },
+            {
+                "title": "Cover grid: Suppress the 2px border Qt draws for the list view"
+            }
+        ],
+        "improved recipes": [
+            "NY Times",
+            "NYT Book Review",
+            "Courrier International",
+            "Le Monde",
+            "TLS Magazine",
+            "Scientific American",
+            "Engadget"
+        ],
+        "new recipes": [
+            {
+                "title": "NYT News based on feeds",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.18.0",
+        "date": "2024-09-13",
+        "new features": [
+            {
+                "type": "major",
+                "title": "E-book viewer: Read aloud: A new Text-to-Speech engine (Piper) that uses a neural network for realistic sounding voices",
+                "description": "To use it access the viewer controls and click the Read aloud button or press 'Ctrl+S'. The neural network is run locally, no cloud services are used. Using the OS Text-to-Speech engine is still possible by clicking the configure button on the Read aloud control bar. Note that the new engine highlights the currently read sentence rather than word."
+            },
+            {
+                "tickets": [
+                    2076346
+                ],
+                "title": "New experimental engine to convert PDF files with support for automatic header/footer removal",
+                "description": "Turn it on via the PDF input section of the conversion dialog."
+            },
+            {
+                "title": "Content server: Viewer: Read Aloud: Implement word-by-word tracking when reading aloud if the browser and OS used support it, for example, Chromium on Windows, Firefox on Android and Safari on macOS"
+            },
+            {
+                "tickets": [
+                    2080315
+                ],
+                "title": "Image popup: Add a context menu with an option to reset the current zoom"
+            },
+            {
+                "title": "Edit metadata dialog: Show the number of data files on the data files button"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Fix a regression in the previous release that broke using Tab key to move around the book list while editing cells"
+            },
+            {
+                "tickets": [
+                    2077801
+                ],
+                "title": "E-book viewer: Fix scrollbar position not updating during continuous scroll"
+            },
+            {
+                "tickets": [
+                    2077871
+                ],
+                "title": "E-book viewer: Fix a harmless error when the book contains page list references whose targets do not exist"
+            },
+            {
+                "tickets": [
+                    2077794
+                ],
+                "title": "Linux binary build: Fix missing libdeflate dependency"
+            }
+        ],
+        "improved recipes": [
+            "Revista Muy Interesante",
+            "Ars Technica",
+            "South China Morning Post",
+            "Times Literary Supplement",
+            "Hackernews",
+            "Star Gazetesi",
+            "Hurriyet",
+            "Gorafi",
+            "Times Online"
+        ],
+        "new recipes": [
+            {
+                "title": "Muy Interesante M\u00e9xico",
+                "author": "unkn0wn"
+            },
+            {
+                "title": "Salzburger Nachrichten",
+                "author": "\u0130lker Melik S\u0131tk\u0131"
+            },
+            {
+                "title": "Computer Weekly",
+                "author": "\u0130lker Melik S\u0131tk\u0131"
+            }
+        ]
+    },
+    {
+        "version": "7.17.0",
+        "date": "2024-08-23",
+        "new features": [
+            {
+                "type": "major",
+                "title": "E-book viewer: Support for jumping to and displaying paper edition page numbers",
+                "description": "If an e-book contains embedded information about the pages from the paper edition of the book, the calibre E-book viewer can now jump to a page number via the Go to button in the viewer controls. You can also optionally have the current paper edition page number displayed in the header/footer by adding \"Pages from paper edition\" to either the header or footer in the viewer settings."
+            },
+            {
+                "tickets": [
+                    2076251
+                ],
+                "title": "Edit book: When text is selected allow changing the indentation of all lines in the selection by pressing Tab to increase one level or Shift+Tab to decrease one level"
+            },
+            {
+                "title": "Allow a plugboard to change the series_index as well as the series name."
+            },
+            {
+                "title": "News download: News recipes can now optionally use browser engines based on either Qt or Chromium network stacks instead of mechanize"
+            },
+            {
+                "title": "Email delivery: When sending emails to Kindles do not convert filenames to English letters as Amazon appears to have finally fixed their email servers to handle non-English filenames"
+            },
+            {
+                "tickets": [
+                    2075565
+                ],
+                "title": "Quickview: Add a tooltip displaying the full cell contents"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Update the version of the Qt toolkit bundled with calibre to the latest available, fixing some crashes on macOS related to accessibility tools"
+            },
+            {
+                "tickets": [
+                    2075970
+                ],
+                "title": "Edit book: Fix searching marking incorrect text in the presence of non-BMP unicode characters"
+            },
+            {
+                "tickets": [
+                    2074002
+                ],
+                "title": "Conversion: Do not embed a second copy of a font when using the option to embed font family if the font is already embedded in the book"
+            },
+            {
+                "tickets": [
+                    2076515
+                ],
+                "title": "calibredb list: Fix a regression in the previous release that required setting --template-header to empty to use the list command"
+            },
+            {
+                "title": "Tolino driver: Fix books from the Tolino cloud not being listed"
+            },
+            {
+                "title": "Windows: Book details panel: Fix selection not visible when using the system default theme"
+            },
+            {
+                "tickets": [
+                    2073441
+                ],
+                "title": "Hide the Virtual library tab bar in device view as it is non-functional"
+            }
+        ],
+        "improved recipes": [
+            "Jot Down",
+            "Various Russian and Ukrainian news sources",
+            "Nautilus Magazine",
+            "S\u00fcddeutsche Zeitung",
+            "The India Forum",
+            "WSJ",
+            "National Geographic",
+            "Washington Post",
+            "Mediapart",
+            "Bloomberg",
+            "Nautilus"
+        ],
+        "new recipes": [
+            {
+                "title": "GaGadget",
+                "author": "bugmen00t"
+            },
+            {
+                "title": "S\u00fcddeutsche Zeitung Magazin",
+                "author": "unkn0wn"
+            },
+            {
+                "title": "Science Journal",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.16.0",
+        "date": "2024-07-31",
+        "new features": [
+            {
+                "title": "Add a driver for the new 2024 Tolino devices. They use a modified version of the Kobo firmware, so they are detected as Kobo devices."
+            },
+            {
+                "title": "Various news recipes now have the ability to download past issues, accessible via the Advanced tab in the Schedule news dialog"
+            }
+        ],
+        "bug fixes": [
+            {
+                "type": "major",
+                "tickets": [
+                    2075128
+                ],
+                "title": "ONLY if you use the calibre Content server, you should update calibre as soon as possible",
+                "description": "If you do not know what the Content server is, you do not use it, and these do not apply to you. If you have set a password to access the Content server that you have not shared with anyone, these do not affect you. A remote code execution bug in the Content server introduced in calibre version 6.9.0 (released on 2022-11-25) means that anyone with access to the server also has access to the rest of the computer the server is running on. If you are using a password to protect access to the server only people that know the password can gain access via the bug. Thanks to STAR Labs (https://starlabs.sg) for finding these vulnerabilities."
+            },
+            {
+                "tickets": [
+                    2075125
+                ],
+                "title": "Content server: Fix path traversal vulnerability",
+                "description": "A bug in a feature introduced in calibre version 6.16.0 (released 2023-04-20) means anyone with access to the server can also read non calibre related files on the computer running the server."
+            },
+            {
+                "tickets": [
+                    2075131
+                ],
+                "title": "Content server: Fix SQL injection vulnerability",
+                "description": "A bug in a feature introduced in calibre version 6.10.0 (released 2022-12-16) means anyone with access to the server can also read non-calibre SQLITE database files on the computer running the server."
+            },
+            {
+                "tickets": [
+                    2075130
+                ],
+                "title": "Content server: Fix an XSS vulnerability in one endpoint",
+                "description": "Only relevant if you embed the calibre server within a larger server, it means attackers who can convince users to click on a specially crafted link, can run JavaScript code with the same origin as the larger server calibre is embedded in."
+            },
+            {
+                "tickets": [
+                    2073972
+                ],
+                "title": "Content server: Fix an error when opening the downloaded books page directly via a link and using a custom book list template"
+            },
+            {
+                "title": "macOS: Fix opening multiple books from Finder with the editor only opening one of the books"
+            },
+            {
+                "title": "Fix the legacy LRF format viewer not starting"
+            },
+            {
+                "tickets": [
+                    2074147
+                ],
+                "title": "Fix mouse wheel not transitioning from undefined date to current date in date entry controls"
+            }
+        ],
+        "improved recipes": [
+            "Harvard Business Review",
+            "Live Mint",
+            "Business Standard",
+            "Pagina12",
+            "Bloomberg"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.15.0",
+        "date": "2024-07-19",
+        "new features": [
+            {
+                "title": "Fetch news: Allow individual news sources to specify source specific options such as downloading of past editions"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2073323
+                ],
+                "title": "Windows: MTP driver: Fix a regression in the previous release that caused an error with some devices"
+            },
+            {
+                "title": "Icon theme creation dialog: Fix various issues when creating an icon theme with many icons that have light/dark variants"
+            }
+        ],
+        "improved recipes": [
+            "Bloomberg",
+            "Eenadu",
+            "Mediapart"
+        ],
+        "new recipes": [
+            {
+                "title": "WSJ News",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.14.0",
+        "date": "2024-07-12",
+        "new features": [
+            {
+                "tickets": [
+                    2072442
+                ],
+                "title": "Book details: When dropping files add an option to add them to the book as data files"
+            },
+            {
+                "title": "Edit book: A new action to toggle line wrapping mode in all code editors. Can be assigned via Preferences->Keyboard shortcuts->Global actions or added to the toolbar via Preferences->Toolbars->Book wide actions"
+            },
+            {
+                "title": "Kobo driver: Add an option to force the SeriesID for all books in a series to have the same value"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2071458
+                ],
+                "title": "Fix a regression in the previous release that broke merging of books when the confirmation for the merge was disabled"
+            },
+            {
+                "tickets": [
+                    2072412
+                ],
+                "title": "E-book viewer: Allow some header and footer items such as progress to overflow instead of being truncated"
+            },
+            {
+                "tickets": [
+                    2072405
+                ],
+                "title": "HTMLZ output: Make renaming of image files happen in filename order"
+            },
+            {
+                "tickets": [
+                    2072384
+                ],
+                "title": "MTP driver: Fix infinite loop when connecting to some devices with more 65K objects in their filesystem"
+            },
+            {
+                "title": "Fix shortcut editing widget when Qt is using a theme that inserts accelerators into push button labels automatically"
+            }
+        ],
+        "improved recipes": [
+            "Instapaper",
+            "MIT Tech Review",
+            "Guardian",
+            "Liberation",
+            "The Times and Sunday Times",
+            "Bloomberg Businessweek",
+            "Times Literary Supplement"
+        ],
+        "new recipes": [
+            {
+                "title": "Ancient Egypt Magazine, Minerva Magazine, Military History Magazine and World Archaeology Magazine",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.13.0",
+        "date": "2024-06-28",
+        "new features": [
+            {
+                "tickets": [
+                    2071033
+                ],
+                "title": "When merging books add an option to store discarded or replaced covers as an alternate cover in the data folder of the target book"
+            },
+            {
+                "tickets": [
+                    2068070
+                ],
+                "title": "Generate CSV catalog: Add a button to sort the fields by the order in which they appear in the book list"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2067755
+                ],
+                "title": "MTP driver: Preserve cover aspect ratio for thumbnail generation"
+            },
+            {
+                "tickets": [
+                    2071044
+                ],
+                "title": "Fix identifiers not always being merged correctly when merging books"
+            },
+            {
+                "tickets": [
+                    2069541
+                ],
+                "title": "DOCX Input: Fix extra left padding when converting lists"
+            },
+            {
+                "title": "Amazon metadata download: Get title and comments for audiobook pages"
+            },
+            {
+                "title": "Amazon metadata: When filtering search engine results by title ignore words of the title that are purely punctuation"
+            },
+            {
+                "title": "When matching books on a device to book in the library assume a match if the title and any one author match, don't require all authors to match"
+            },
+            {
+                "tickets": [
+                    2069553
+                ],
+                "title": "Update Google Images cover download plugin for website changes"
+            },
+            {
+                "tickets": [
+                    2069494
+                ],
+                "title": "When adding new books if the timestamp is specified as undefined use the current timestamp"
+            },
+            {
+                "title": "Content server: Fix systemd pre-activated socket not working"
+            },
+            {
+                "tickets": [
+                    2071390
+                ],
+                "title": "Content server: Fix no KFX download link in OPDS acquisition feeds"
+            }
+        ],
+        "improved recipes": [
+            "Harpers",
+            "Wall Street Journal",
+            "Liberation",
+            "How to Geek",
+            "Make Use Of",
+            "TechCrunch",
+            "LifeHacker",
+            "India Today",
+            "1843",
+            "Reuters",
+            "The Week India",
+            "Slate"
+        ],
+        "new recipes": [
+            {
+                "title": "Times Literary Supplement",
+                "author": "unkn0wn"
+            },
+            {
+                "title": "Wall Street Journal Magazine",
+                "author": "unkn0wn"
+            },
+            {
+                "title": "Various Valnet Publishing Group recipes",
+                "author": "Spicy Poison"
+            },
+            {
+                "title": "VOX, The Good E-reder and The e-book Reader",
+                "author": "SpicyPoison"
+            },
+            {
+                "title": "Gates Notes, Greatist, Halthline and United Nations",
+                "author": "SpicyPoison"
+            }
+        ]
+    },
+    {
+        "version": "7.12.0",
+        "date": "2024-05-30",
+        "new features": [
+            {
+                "tickets": [
+                    2067167
+                ],
+                "title": "E-book polishing: Add option to download external resources (images/stylesheets/etc.)"
+            },
+            {
+                "title": "Conversion: Add an option under Structure detection to automatically fill in blank alt attributes for images that have alt text in the image file metadata"
+            },
+            {
+                "tickets": [
+                    2067437
+                ],
+                "title": "Content server: Use the book title as the filename for downloaded highlights"
+            },
+            {
+                "title": "Review downloaded metadata dialog: Add a \"Previous\" button to go back to the last reviewed book"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Content server viewer: Fix the bottom of the text being cut off on mobile browsers when not in full screen mode. Unfortunately, this means the viewer now requires a browser no more than two years old."
+            },
+            {
+                "tickets": [
+                    2067168
+                ],
+                "title": "Kindle driver: Increase the size of the cover thumbnails sent to the Scribe"
+            },
+            {
+                "tickets": [
+                    1943495
+                ],
+                "title": "Kindle output: Fix cover images that contain EXIF data without a rotation not displaying on the Kindle lockscreen"
+            },
+            {
+                "title": "E-book viewer: Fix ruby tags not excluded when searching for text"
+            },
+            {
+                "tickets": [
+                    2067128
+                ],
+                "title": "Content server viewer: Fix a regression in the previous release that broke searching"
+            }
+        ],
+        "improved recipes": [
+            "Economist Espresso",
+            "Slate"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.11.0",
+        "date": "2024-05-24",
+        "new features": [
+            {
+                "title": "Kindle driver: Add support for sending cover thumbnails to the Kindle Scribe"
+            },
+            {
+                "title": "A new options under Preferences->Look & feel to draw covers with rounded corners"
+            },
+            {
+                "tickets": [
+                    2064674
+                ],
+                "title": "Bulk metadata edit: Add a new tab where you can create rules to transform tags/authors/publishers for the selected books"
+            },
+            {
+                "tickets": [
+                    2065544
+                ],
+                "title": "Tag browser context menu for Formats now has Open with menu items"
+            },
+            {
+                "tickets": [
+                    2064665
+                ],
+                "title": "E-book viewer: When hovering over the top/bottom margin show a button indicating that a click will open the viewer controls. Can be configured via The Headers and footers section of the viewer Preferences."
+            },
+            {
+                "title": "Spell check dialog: Also show count of currently displayed words"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2065249
+                ],
+                "title": "E-book viewer: Fix searching not ignoring ruby text"
+            },
+            {
+                "title": "Edit book: Save the state of the current book when opening a new book via File->Open book"
+            },
+            {
+                "tickets": [
+                    2064887
+                ],
+                "title": "Edit book: Fix importing a list of words into a user dictionary not working"
+            },
+            {
+                "title": "EPUB3 metadata: Do not fail to read metadata in the presence on invalid calibre user metadata in the OPF file with empty keys"
+            },
+            {
+                "title": "Get books: Fix rules to map tags on adding books not being applied to books downloaded via Get books"
+            },
+            {
+                "tickets": [
+                    2064792
+                ],
+                "title": "Spellcheck dialog: Move the checkbox to hide correctly spelled words with the rest of the checkboxes that filter the word list"
+            }
+        ],
+        "improved recipes": [
+            "Slate",
+            "Wall Street Journal",
+            "London Review of Books",
+            "Economist",
+            "Bloomberg",
+            "Business Week",
+            "The World Ahead",
+            "National Geographic"
+        ],
+        "new recipes": [
+            {
+                "title": "Collider, Comic Book Archive, Make Use Of, MoviewWeb and ScreenRant",
+                "author": "Spicy Poison"
+            },
+            {
+                "title": "Lex Fridman Podcast",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.10.0",
+        "date": "2024-05-03",
+        "new features": [
+            {
+                "title": "Export of calibre data: Ensure individual part files in the exported data are no larger than one gigabyte even if the library contains individual files larger than that size.",
+                "description": "Note that this means that exports created by calibre from this version on will not be importable by earlier versions. However, exports from earlier versions should still be importable."
+            },
+            {
+                "title": "Edit book: Spell check: Add options to exclude words in ALL CAPS or with numbers or in camelCase/snake_case from the list of words"
+            },
+            {
+                "title": "Allow easily inverting the current search via the right click menu on the search box"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2064546
+                ],
+                "title": "Kobo driver: Fix database unsupported error with newest firmware"
+            },
+            {
+                "tickets": [
+                    2063301
+                ],
+                "title": "DOCX Input: Fix text elements containing only whitespace being incorrectly ignored"
+            },
+            {
+                "title": "Bulk metadata dialog: Do not fail when setting covers from ebook files and some of the files have invalid covers"
+            }
+        ],
+        "improved recipes": [
+            "Economist",
+            "The Week",
+            "Caravan Magazine",
+            "Financial Times"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.9.0",
+        "date": "2024-04-19",
+        "new features": [
+            {
+                "tickets": [
+                    2060886
+                ],
+                "title": "Kobo driver: Add support for the new color Kobo devices"
+            },
+            {
+                "title": "Edit book: Add a setting to control cursor width under Preferences->Editor settings"
+            },
+            {
+                "title": "Edit book: Regex-function mode: Show a confirmation popup when closing the function editor when there are unsaved changes"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2060314
+                ],
+                "title": "Fix undocked Quickview dialog not being restored at startup"
+            },
+            {
+                "tickets": [
+                    2044118
+                ],
+                "title": "Windows: Fix an issue where closing a maximized calibre window to the system tray and then reconnecting with remote desktop would cause a blank calibre window to be displayed"
+            }
+        ],
+        "improved recipes": [
+            "El Correo",
+            "Eenadu",
+            "ORFonline",
+            "NatGeo",
+            "Harpers Magazine",
+            "New Yorker",
+            "Business Today",
+            "The Week",
+            "Asahi Shimbun",
+            "Outlook Magazine"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.8.0",
+        "date": "2024-04-05",
+        "new features": [
+            {
+                "tickets": [
+                    2057929
+                ],
+                "title": "E-book viewer: Highlight panel: Allow filtering the shown highlights by type of highlight"
+            },
+            {
+                "title": "Conversion: Add support for the CSS text-transform property when subsetting embedded fonts"
+            },
+            {
+                "tickets": [
+                    2060079
+                ],
+                "title": "E-book viewer: Allow displaying the view mode paged/flow in the header/footer"
+            },
+            {
+                "tickets": [
+                    2059162
+                ],
+                "title": "Book details popup window: Allow dropping of files to add formats/set the cover just as for the book details panel"
+            },
+            {
+                "tickets": [
+                    2058814
+                ],
+                "title": "Book details: Context menu: Add a menu action to remove the associated link"
+            },
+            {
+                "title": "DOCX Input: Add role=doc-noteref for links to footnotes/endnotes so that they popup in more e-book readers"
+            },
+            {
+                "title": "Add a \"Mark all selected books\" to the Mark action."
+            },
+            {
+                "tickets": [
+                    2059169
+                ],
+                "title": "Add \"Hide Empty Categories\" to tag browser configuration menu"
+            },
+            {
+                "title": "Supernote: Support for new device firmware"
+            },
+            {
+                "title": "Sort by tool:  Add an action to re-apply the current sort"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Grid view cover cache: Fix covers not loading when cache entries are stale"
+            },
+            {
+                "tickets": [
+                    2058798
+                ],
+                "title": "Conversion: Do not change viewport relative font sizes used for SVG text elements"
+            },
+            {
+                "tickets": [
+                    2058798
+                ],
+                "title": "Conversion: Fix <style> tags inside <svg> tags not being processed"
+            },
+            {
+                "title": "Get books: Update Kobo store plugin for website changes"
+            },
+            {
+                "title": "EPUB Input: Use a translated name for the cover page"
+            }
+        ],
+        "improved recipes": [
+            "Caravan",
+            "Global Times",
+            "New York Review of Books",
+            "Himal Southasian",
+            "The Week",
+            "CBC Canada"
+        ],
+        "new recipes": [
+            {
+                "title": "Bergfreunde Blog",
+                "author": "VoHe"
+            },
+            {
+                "title": "Live Law and Politico.eu",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.7.0",
+        "date": "2024-03-14",
+        "new features": [
+            {
+                "tickets": [
+                    2056116
+                ],
+                "title": "Trim image: Allow specifying the size of the trim rectangle using numbers"
+            },
+            {
+                "tickets": [
+                    2056664
+                ],
+                "title": "Full text search: Allow pressing Ctrl+S to select the current book in the calibre book list"
+            },
+            {
+                "title": "Speed up scrolling through the book list book-by-book by only redrawing the book details panel when scrolling pauses"
+            },
+            {
+                "title": "Add a tweak under Preferences->Tweaks to set the first day of the week in popup calendars used to input dates"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2056470
+                ],
+                "title": "CHM Input: Handle CHM files with no HHC Table of Contents"
+            },
+            {
+                "title": "E-book viewer: Fix a few settings such as pages per screen and header/footers not being saved in profiles"
+            },
+            {
+                "tickets": [
+                    2056614
+                ],
+                "title": "Full text search: Ignore text inside <ruby> tags when indexing books"
+            },
+            {
+                "title": "DOCX Output: Preserve spaces around soft hyphens"
+            },
+            {
+                "title": "Book details popup: Copy the original cover image to the clipboard even when the image is rescaled to fit into view"
+            },
+            {
+                "title": "Fix changing disabled colors in the UI color palette overriding non-disabled colors"
+            },
+            {
+                "title": "Content server: Fix deletion of viewer profiles not working"
+            }
+        ],
+        "improved recipes": [
+            "LiveMint",
+            "Bloomberg",
+            "National Geographic",
+            "MIT Technology Review",
+            "NY Review of Books",
+            "Scientific American"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.6.0",
+        "date": "2024-03-01",
+        "new features": [
+            {
+                "type": "major",
+                "tickets": [
+                    1979022
+                ],
+                "title": "E-book viewer: Allow saving current settings in \"profiles\" that can be quickly and easily swapped between",
+                "description": "To create a profile or switch to a previously saved profile access \"Profiles\" from the viewer controls or press the `Alt+P` shortcut."
+            },
+            {
+                "tickets": [
+                    2053144
+                ],
+                "title": "Edit book: Add a shortcut `Ctrl+M` to merge selected files"
+            },
+            {
+                "title": "Get books: Add support for Amazon Mexico"
+            },
+            {
+                "title": "A new toolbar button to show all available actions in sub menus. Can be added via `Preferences->Toolbars & menus`"
+            },
+            {
+                "title": "Edit book: Allow selecting multiple books to edit at once, opening all selected books in separate editor instances"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2054617
+                ],
+                "title": "Cover grid: Fix dragging the mouse while holding shift to extend the selection not working well"
+            },
+            {
+                "tickets": [
+                    2054934
+                ],
+                "title": "E-book viewer: Fix doing a multi-page selections sometimes causing the start of the selection to move backwards"
+            },
+            {
+                "title": "Edit book: Live CSS: Fix regression causing incorrect colors in calibre 7"
+            },
+            {
+                "title": "Windows: Fix a regression in calibre 7 that caused images in long text columns to not be displayed in the tooltip for the column"
+            },
+            {
+                "title": "Fix disabled items in menus having blurry text"
+            },
+            {
+                "title": "Content server: Fix a regression in the previous release that caused an error when doing a search/sort on some browsers"
+            }
+        ],
+        "improved recipes": [
+            "New Yorker",
+            "Moneycontrol",
+            "Swarajya Mag",
+            "nautil.us",
+            "Pro Physik"
+        ],
+        "new recipes": [
+            {
+                "title": "The Week UK",
+                "author": "unkn0wn"
+            },
+            {
+                "title": "Andhrajyothy",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.5.1",
+        "date": "2024-02-09",
+        "new features": [
+            {
+                "title": "Allow fine tuning the colors used in the calibre interface via Preference->Look & feel->Main interface->User interface colors",
+                "description": "Note that calibre no longer follows system colors on Linux in light mode (the only place where it used to follow system colors). However, there is a convenient button in the manage colors dialog to import the system colors."
+            },
+            {
+                "tickets": [
+                    2052462
+                ],
+                "title": "Full text search window: Add actions to the context menu to open the book at the clicked on result. Also allow using the view book shortcut to open the currently selected search result"
+            },
+            {
+                "tickets": [
+                    2052460
+                ],
+                "title": "When showing the Full text search dialog, pre populate the search box with the contents of the main calibre search box if the main search box contains a simple search"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Windows: Fix a regression in 7.0 that caused images referring to files on the disk within comments columns to not display in some circumstances"
+            },
+            {
+                "title": "E-book viewer: Fix clock showing hour as zero instead of 12 between 12 and 1 am/pm"
+            },
+            {
+                "tickets": [
+                    2050100
+                ],
+                "title": "Edit book: When wrapping selected text in a tag, preserve the selection after wrapping"
+            },
+            {
+                "tickets": [
+                    2050075
+                ],
+                "title": "Content server: Fix a periodic spurious error message when reading books in offline mode"
+            },
+            {
+                "title": "Fix a regression in 7.0 caused by a regression in Qt that would result in calibre hanging rarely when using the cover browser view"
+            },
+            {
+                "tickets": [
+                    2049992
+                ],
+                "title": "Fix custom template functions not usable in save to disk templates"
+            },
+            {
+                "title": "Fix a regression in 7.2 that caused the popup used for editing fields in the book list to be mis-positioned on very wide monitors"
+            },
+            {
+                "tickets": [
+                    2052766
+                ],
+                "title": "Version 7.5.1 fixes a bug in 7.5.0 where calibre would not start up using dark colors when the system was in dark mode on some windows installs and another bug that could cause errors when using cover grid mode with covers stored in CMYK colorspace"
+            }
+        ],
+        "improved recipes": [
+            "El Diplo",
+            "Science News",
+            "Barrons",
+            "Financial Times",
+            "Business Today",
+            "Le Monde",
+            "Scientific American"
+        ],
+        "new recipes": [
+            {
+                "title": "ugeskriftet",
+                "author": "morusn"
+            },
+            {
+                "title": "Martin Fowler and Gitbug Blogs",
+                "author": "Lucas Lois"
+            }
+        ]
+    },
+    {
+        "version": "7.4.0",
+        "date": "2024-01-19",
+        "new features": [
+            {
+                "title": "Add support for the Supernote A6X2"
+            },
+            {
+                "title": "Narrow layout: Place the cover browser above the book list when the window has a narrow aspect ratio. Can be controlled via Preferences->Look & feel->Cover browser"
+            },
+            {
+                "tickets": [
+                    2046825
+                ],
+                "title": "Category notes browser: Add a button to search for books in the currently selected category"
+            },
+            {
+                "title": "Keyboard shortcut to toggle main window layout (Alt+Shift+L)"
+            },
+            {
+                "title": "Add the possibility to assign keyboard shortcuts to the tag browser sort functions"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Fix a regression in the previous release that caused the cover browser to not close when it is used as a separate window"
+            },
+            {
+                "title": "Fix a regression in the previous release that caused comments in the Book details panel to be rendered below rather than at the side of the other information"
+            },
+            {
+                "title": "Edit book: Fix highlighting of special character not changed immediately after it is edited, only after a subsequent action"
+            },
+            {
+                "title": "Move Preferences to the left in the default toolbar, making it less likely to be hidden behind an expander button on small screens"
+            }
+        ],
+        "improved recipes": [
+            "LiveMint",
+            "Foreign Policy",
+            "New Scientist"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.3.0",
+        "date": "2024-01-05",
+        "new features": [
+            {
+                "title": "Tag browser: Allow displaying buttons next to items that have notes or links for easy access. To enable these use Preferences->Look & feel->Tag browser"
+            },
+            {
+                "title": "Font subsetting: Preserve all OpenType layout features. This makes the subset font files larger but ensures there is no visual degradation when using the subsetted font files in different contexts."
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "macOS: Fix main calibre window not remembering its size on restart"
+            },
+            {
+                "title": "Edit book: Fix the \"Show changes\" window moving down by a few pixels every time it is opened"
+            },
+            {
+                "tickets": [
+                    2047257
+                ],
+                "title": "Amazon metadata download: Fixes for various changes to amazon website markup"
+            },
+            {
+                "tickets": [
+                    2047181
+                ],
+                "title": "E-book viewer: When looking up words via Google in Europe pre-approve the GDPR consent cookie"
+            },
+            {
+                "tickets": [
+                    2046673
+                ],
+                "title": "Windows: Content server: Fix regression in previous release that broke testing for local connections"
+            },
+            {
+                "title": "Windows: Fix a regression that caused selections in the Book details panel to be invisible"
+            }
+        ],
+        "improved recipes": [
+            "Foreign Policy",
+            "Business Standard",
+            "Il Post",
+            "Indian Express",
+            "Washington Post"
+        ],
+        "new recipes": [
+            {
+                "title": "Hindustan Times Print Edition",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.2.0",
+        "date": "2023-12-15",
+        "new features": [
+            {
+                "title": "Content server: Also listen for all incoming IPv6 connections by default, not just IPv4"
+            },
+            {
+                "title": "Book details: Allow deleting notes from the right click menu easily"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2045133
+                ],
+                "title": "Windows: Edit book: Fix a crash when using the check book tool with a book that contains malformed markup, in calibre 7"
+            },
+            {
+                "title": "Windows: Improve flickering at startup due to a Qt regression in calibre 7"
+            },
+            {
+                "title": "Windows: Fix moving the main window causing popup/floating windows to be resized in calibre 7 due to yet another Qt regression"
+            },
+            {
+                "tickets": [
+                    2044659
+                ],
+                "title": "Fix detection of existing books on the Tolino Vision 6"
+            },
+            {
+                "title": "Linux: Fix external applications not being launched under Wayland in calibre 7 because of a bug in Qt"
+            },
+            {
+                "title": "Linux: Fix network requests failing under Fedora in calibre 7"
+            }
+        ],
+        "improved recipes": [
+            "Reuters",
+            "Scientific American",
+            "New Yorker",
+            "Times of India",
+            "infzm",
+            "singtaohk"
+        ],
+        "new recipes": []
+    },
+    {
+        "version": "7.1.0",
+        "date": "2023-11-23",
+        "new features": [
+            {
+                "title": "Notes editor: When pasting HTML with images offer to download remote images in the pasted content"
+            }
+        ],
+        "bug fixes": [
+            {
+                "title": "Fix regression in 7.0 that broke restore of db from backups"
+            },
+            {
+                "title": "Content server: Fix newly added books on homepage not restricted to the books the logged in user is allowed to access"
+            },
+            {
+                "tickets": [
+                    2044118
+                ],
+                "title": "When starting in system tray do not flash the main window briefly"
+            },
+            {
+                "title": "Notes editor: Fix spurious error message when saving a note that contains pasted HTML that refers to an image"
+            },
+            {
+                "tickets": [
+                    2043998
+                ],
+                "title": "Fix a regression that caused the unknown/unset date to incorrectly be displayed/edited as a date in the year AD 101 in some timezones"
+            },
+            {
+                "title": "Comments editor: Fix data file links not working"
+            },
+            {
+                "title": "Linux installer: Check that the user has libxcb-cursor.so.0 installed. If not quit early with an error message asking them to install it"
+            },
+            {
+                "tickets": [
+                    2044408
+                ],
+                "title": "LRF Output: Fix a regression in 7.0 that broke conversion to LRF"
+            }
+        ],
+        "improved recipes": [
+            "Substack"
+        ],
+        "new recipes": [
+            {
+                "title": "The World Ahead",
+                "author": "unkn0wn"
+            }
+        ]
+    },
+    {
+        "version": "7.0.0",
+        "date": "2023-11-17",
+        "new features": [
+            {
+                "type": "major",
+                "title": "For details on the major changes in calibre between 7.0 and 6.0, see https://calibre-ebook.com/new-in/sixteen"
+            },
+            {
+                "type": "major",
+                "title": "The ability to add notes to any author, tag, series, etc. in calibre with links and images"
+            },
+            {
+                "tickets": [
+                    2040487
+                ],
+                "title": "E-book viewer: Add support for HTML image maps"
+            },
+            {
+                "title": "Content server home page: Show the three most recently added books in the default library"
+            },
+            {
+                "title": "Content server: Add button to return to book details page at top level of controls"
+            },
+            {
+                "title": "Content server: Book details: Open links in comments fields in the same window rather than a new window"
+            },
+            {
+                "title": "Add a \"Show items in selected books\" choice to Manage tags and Manage authors"
+            },
+            {
+                "tickets": [
+                    2042804
+                ],
+                "title": "Show the previously used language, if any, second in the language selection drop down"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2043415
+                ],
+                "title": "Metadata download: Fix downloads from Google not working in Europe because of the GDPR"
+            },
+            {
+                "tickets": [
+                    2042815
+                ],
+                "title": "Fix editing dates with days sometimes off by one day"
+            },
+            {
+                "title": "Edit book: Fix highlighting for special characters not visible when the cursor is on the line with the special character"
+            },
+            {
+                "tickets": [
+                    2043248
+                ],
+                "title": "Fix embedding metadata showing infinite error dialogs on windows if a file is locked by another program"
+            },
+            {
+                "tickets": [
+                    2040074
+                ],
+                "title": "PDF Output: Fix an error when trying to set header or footer with an input document that has invalid content after the main body"
+            },
+            {
+                "tickets": [
+                    2042791
+                ],
+                "title": "E-book viewer: Read aloud: Fix clicking on empty spaces causing read aloud to restart from beginning of chapter"
+            },
+            {
+                "title": "Book details: Fix Manage authors via context menu not working"
+            },
+            {
+                "tickets": [
+                    2041848
+                ],
+                "title": "E-book viewer: Showing chrome should close an active footnote popup first and only show chrome if the user repeats the action"
+            },
+            {
+                "tickets": [
+                    2041745
+                ],
+                "title": "Fix very slow metadata updates on some PDF files"
+            },
+            {
+                "tickets": [
+                    1262875
+                ],
+                "title": "Catalogs: Do not erase any tags the user adds to a catalog book entry when the catalog is re-generated"
+            },
+            {
+                "tickets": [
+                    2042748
+                ],
+                "title": "Linux installer: Fix downloading of signatures for older versions"
+            },
+            {
+                "tickets": [
+                    2041357
+                ],
+                "title": "Fix editing non-active Virtual library changes sort of book list"
+            }
+        ],
+        "improved recipes": [
+            "Financial Times",
+            "National Geographic",
+            "Hamilton Spectator",
+            "Times of India",
+            "MIT Tech Review",
+            "Bloomberg",
+            "Washington Post",
+            "Project Syndicate",
+            "Cumhuriyet",
+            "Foreign Affairs",
+            "Harvard Business Review",
+            "Wall Street Journal"
+        ],
+        "new recipes": [
+            {
+                "title": "Bookforum, Kirkus Reviews and Poetry Magazine",
+                "author": "ping"
+            }
+        ]
+    },
+    {
+        "version": "6.29.0",
+        "date": "2023-10-20",
+        "new features": [
+            {
+                "tickets": [
+                    2038760
+                ],
+                "title": "E-book viewer: Add a command line flag --new-instance to force the viewer to open a new window even if the option to always use a single viewer window is set"
+            },
+            {
+                "tickets": [
+                    2038862
+                ],
+                "title": "E-book viewer: Image popup: Add a checkbox to remember the last used zoom level"
+            }
+        ],
+        "bug fixes": [
+            {
+                "tickets": [
+                    2039336
+                ],
+                "title": "Annotations browser: Fix exporting highlights in markdown not including all chapter titles for books with only a single highlight per chapter or a multi level ToC"
+            },
+            {
+                "tickets": [
+                    2038747
+                ],
+                "title": "E-book viewer: Fix a regression that could cause the viewer to enter an infinite loop when displaying the result of a search that has only one match that is not found"
+            },
+            {
+                "tickets": [
+                    2038747
+                ],
+                "title": "E-book viewer: Fix the occasional search result being marked as not found even though it is found"
+            },
+            {
+                "tickets": [
+                    2039474
+                ],
+                "title": "TXTZ Output plugin: Only keep images if the text format is one that can reference images"
+            },
+            {
+                "tickets": [
+                    2038848
+                ],
+                "title": "TXTZ Output: Fix cover not being properly identified in the generated TXTZ metadata"
+            },
+            {
+                "tickets": [
+                    2038575
+                ],
+                "title": "FB2 Input: Fix the \"Annotations\" section not showing up in the Table of Contents"
+            },
+            {
+                "tickets": [
+                    2039395
+                ],
+                "title": "Linux: Content server: Do not call listen on pre-activated sockets"
+            },
+            {
+                "title": "Fix sort order of similarly-named hierarchical categories"
+            },
+            {
+                "tickets": [
+                    2038778
+                ],
+                "title": "Fix a regression that broke reading of covers from HTMLZ and TXTZ files"
+            }
+        ],
+        "improved recipes": [
+            "Wall Street Journal",
+            "Scientific American",
+            "1843",
+            "Financial Times",
+            "Spectator Magazine",
+            "El Diplo",
+            "Wasshington Post",
+            "national Geographic"
+        ],
+        "new recipes": [
+            {
+                "title": "Project Syndicate, Scroll.in and Newslaundry",
+                "author": "unkn0wn"
+            }
+        ]
+    }
+]
