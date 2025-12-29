@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/popup.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reader.css') }}">
+
 </head>
+
 
 <body>
     <div id="sidebar">
@@ -216,6 +218,9 @@
       <script src="{{ url_for('static', filename='js/libs/screenfull.min.js') }}"></script>
       <script src="{{ url_for('static', filename='js/libs/reader.min.js') }}"></script>
       <script src="{{ url_for('static', filename='js/reading/epub.js') }}"></script>
-      <!--script src="{{ url_for('static', filename='js/reading/locationchange-polyfill.js') }}"></script-->
+
+      <script src="{{ url_for('static', filename='js/customs/storage.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/customs/reader_tracker.js') }}"></script>
+
     </body>
 </html>

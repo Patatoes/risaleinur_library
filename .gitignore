@@ -171,3 +171,4 @@ cython_debug/
 *.gz
 media
 .DS_Store
+app/calibre/

@@ -1,0 +1,7 @@
+
+#!/usr/bin/env bash
+function dc(){
+    docker-compose -f dcc.yml $@
+}
+
+dc $@
