@@ -10,7 +10,6 @@ class BookEpubTracker {
     }
 
     async init() {
-        this.cfi = await this.getLastCfi();
         await this.storage.init('book-tracker');
         const th = this;
         function checkURLchange() {
@@ -25,7 +24,7 @@ class BookEpubTracker {
         var oldURL = window.location.href;
         setInterval(checkURLchange, 50);
 
-        if (this.cfi) {
+        if (this.getCfi()) {
             this.checkAndResume()
         } else {
             this.trackCfi()
@@ -36,7 +35,7 @@ class BookEpubTracker {
     // Compare current CFI vs stored → resume only if different
     async checkAndResume() {
         // Skip if same position OR no current CFI yet
-        if (this.cfi === window.location.hash.match(/epubcfi\((.*?)\)/)?.[1]) {
+        if (this.getCfi() === window.location.hash.match(/epubcfi\((.*?)\)/)?.[1]) {
             console.log(`Book ${this.bookId}: already at correct position`);
             return;
         }
@@ -46,19 +45,34 @@ class BookEpubTracker {
     }
 
     resumeToStoredCfi() {
-        console.log(`Resumed book ${this.bookId}: ${this.cfi.slice(0, 40)}...`);
-        window.location.hash = `#epubcfi(${this.cfi})`
+        console.log(`Resumed book ${this.bookId}: ${this.getCfi().slice(0, 40)}...`);
+        window.location.hash = `#epubcfi(${this.getCfi()})`
     }
 
     async trackCfi() {
-        this.cfi = window.location.hash.match(/epubcfi\((.*?)\)/)?.[1]
-        const key = `last_page_${this.bookId}`;
-        await this.storage.set(key, this.cfi);
+        const key = `book_${this.bookId}`;
+        const payload = {
+            cfi: window.location.hash.match(/epubcfi\((.*?)\)/)?.[1],
+            ts: Date.now()
+        };
+
+        await this.storage.set(key, payload);
     }
 
-    async getLastCfi() {
-        const key = `last_page_${this.bookId}`;
-        return await this.storage.get(key);
+    async getTs() {
+        const key = `book_${this.bookId}`;
+        const val = await this.storage.get(key);
+
+        if (!val) return;
+        return val.ts;
+    }
+
+    async getCfi() {
+        const key = `book_${this.bookId}`;
+        const val = await this.storage.get(key);
+
+        if (!val) return;
+        return val.cfi;
     }
 }
 
