@@ -1,6 +1,35 @@
 {% import 'image.html' as image %}
 {% extends "layout.html" %}
 {% block body %}
+{% if last_read_books %}
+<div class="discover last-read-books">
+  <h2 class="title">{{_('Son Okunanlar')}}</h2>
+  <div class="row display-flex">
+   {% for entry in last_read_books %}
+    <div class="col-sm-3 col-lg-2 col-xs-6 book session" id="books_last_read">
+      <div class="cover">
+          <a href="{{ url_for('web.show_book', book_id=entry.id) }}">
+              <span class="img" title="{{ entry.title }}">
+                {{ image.book_cover(entry) }}
+              </span>
+          </a>
+      </div>
+      <div class="meta">
+        <a href="{{ url_for('web.show_book', book_id=entry.id) }}">
+          <p title="{{entry.title}}" class="title">{{entry.title|shortentitle}}</p>
+        </a>
+        <p class="author">
+          {% for author in entry.authors %}
+            <a class="author-name" href="{{url_for('web.books_list', data='author', sort_param='stored', book_id=author.id) }}">{{author.name.replace('|',',')|shortentitle(30)}}</a>
+          {% endfor %}
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<hr>
+{% endif %}
 {% if current_user.show_detail_random() and page != "discover" %}
 <div class="discover random-books">
   <h2 class="random-books">{{_('Discover (Random Books)')}}</h2>

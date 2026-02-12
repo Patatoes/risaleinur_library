@@ -157,22 +157,34 @@ def get_email_status_json():
 @web.route("/ajax/bookmark/<int:book_id>/<book_format>", methods=['POST'])
 @user_login_required
 def set_bookmark(book_id, book_format):
+    # 1. Format karmaşasını önlemek için her zaman BÜYÜK HARF yapalım (epub -> EPUB)
+    book_format = book_format.upper()
+    
     bookmark_key = request.form["bookmark"]
+    
+    # 2. Eskisini kesinlikle SİLİYORUZ (Update değil, Delete)
+    # Böylece eski ID çöpe gidiyor.
     ub.session.query(ub.Bookmark).filter(and_(ub.Bookmark.user_id == int(current_user.id),
                                               ub.Bookmark.book_id == book_id,
                                               ub.Bookmark.format == book_format)).delete()
+    
+    # Eğer bookmark boşsa (sıfırlandıysa) sadece silmiş olduk, çıkıyoruz.
     if not bookmark_key:
         ub.session_commit()
         return "", 204
 
+    # 3. Yeni bir kayıt oluşturuyoruz
     l_bookmark = ub.Bookmark(user_id=current_user.id,
                              book_id=book_id,
                              format=book_format,
                              bookmark_key=bookmark_key)
-    ub.session.merge(l_bookmark)
-    ub.session_commit("Bookmark for user {} in book {} created".format(current_user.id, book_id))
+    
+    # 4. KRİTİK NOKTA: 'merge' yerine 'add' kullanıyoruz.
+    # Bu komut veritabanına "Bu yeni bir satır, buna yeni ve büyük bir ID ver" der.
+    ub.session.add(l_bookmark)
+    
+    ub.session.commit()
     return "", 201
-
 
 @web.route("/ajax/toggleread/<int:book_id>", methods=['POST'])
 @user_login_required
@@ -420,8 +432,48 @@ def render_books_list(data, sort_param, book_id, page):
                                                                 db.books_series_link,
                                                                 db.Books.id == db.books_series_link.c.book,
                                                                 db.Series)
+        # --- YENİ EKLENEN KISIM: Son Okunan 10 Kitap ---
+        last_read_books = []
+        if current_user.is_authenticated:
+            # 1. ADIM: 'ub' (Kullanıcı Veritabanı) içinden kullanıcının bookmarklarını çekiyoruz.
+            # Bookmark ID'sine göre tersten sıralayıp (desc) en son eklenen 10 tanesini alıyoruz.
+            recent_bookmarks = ub.session.query(ub.Bookmark)\
+                .filter(ub.Bookmark.user_id == current_user.id)\
+                .order_by(ub.Bookmark.id.desc())\
+                .limit(10).all()
+            
+            # 2. ADIM: Elimizdeki bookmarklardan sadece Kitap ID'lerini bir listeye çıkarıyoruz.
+            book_ids = [b.book_id for b in recent_bookmarks]
+            
+            # 3. ADIM: 'db' (Calibre Kütüphane Veritabanı) içinden bu kitapların detaylarını çekiyoruz.
+            if book_ids:
+                # ID'si listemizde olan kitapları bul
+                books_query = calibre_db.session.query(db.Books).filter(db.Books.id.in_(book_ids)).all()
+                
+                # Veritabanından toplu çekince sıra karışabilir. 
+                # Kitapları tekrar bookmark sırasına (en yeniden eskiye) dizmek için küçük bir sözlük numarası yapıyoruz:
+                books_dict = {book.id: book for book in books_query}
+                last_read_books = [books_dict[bid] for bid in book_ids if bid in books_dict]
+                # --- Başlık Çevirisi Mantığı ---
+                # Kullanıcının o anki dil kodunu alıyoruz (tr, ru, uk, en vb.)
+                current_lang = str(get_locale())[:2] 
+                
+                # Dil sözlüğümüzü oluşturuyoruz
+                titles = {
+                    'tr': 'Son Okunanlar',
+                    'uk': 'Останні прочитані',     # Ukraynaca
+                    'ru': 'Недавно прочитанные',   # Rusça
+                    'en': 'Recently Read Books'    # İngilizce/Varsayılan
+                }
+                
+                # Eğer sözlükte o dil varsa onu al, yoksa İngilizceyi kullan
+                last_read_title = titles.get(current_lang, 'Recently Read Books')
+                # -------------------------------
+        # ------------------------------------------------
         return render_title_template('index.html', random=random, entries=entries, pagination=pagination,
-                                     title=_("Books"), page=website, order=order[1])
+                                     title=_("Books"), page=website, order=order[1], 
+                                     last_read_books=last_read_books,
+                                     last_read_title=last_read_title)  # <--- BURAYI EKLEDİK
 
 
 def render_rated_books(page, book_id, order):

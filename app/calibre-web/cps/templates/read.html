@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html class="no-js">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{{_('epub Reader')}} | {{title}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     {% if g.google_site_verification|length > 0 %}
     <meta name="google-site-verification" content="{{g.google_site_verification}}">
     {% endif %}
@@ -18,211 +17,595 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/popup.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reader.css') }}">
-    <link href="{{ url_for('static', filename='css/libs/bootstrap.min.css') }}" rel="stylesheet" media="screen">
 
+    <style>
+        /* ============================================================
+           GİZLEME
+        ============================================================ */
+        #bookmark,
+        #show-Bookmarks,
+        #bookmarksView {
+            display: none !important;
+        }
+
+        /* ============================================================
+           BAŞLIK ÇUBUĞU DÜZENİ
+        ============================================================ */
+        #titlebar {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px !important;
+            padding: 0 15px;
+            width: 100% !important;
+            box-sizing: border-box;
+            overflow: visible !important;
+        }
+        #opener {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        #metainfo {
+            flex: 1;
+            min-width: 0;
+            text-align: center;
+            margin: 0 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        #title-controls {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+            position: static !important;
+        }
+
+        /* ============================================================
+           İKON BOYUTLARI
+        ============================================================ */
+        .icon-menu,
+        .icon-cog,
+        .icon-resize-full {
+            font-size: 28px !important;
+            width: 40px !important;
+            height: 40px !important;
+            line-height: 40px !important;
+            text-align: center;
+            cursor: pointer;
+            display: inline-block !important;
+            text-decoration: none !important;
+        }
+        .home-icon {
+            width: 30px !important;
+            height: 30px !important;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none !important;
+        }
+        .home-icon svg { width: 100%; height: 100%; }
+
+        /* ============================================================
+           AYARLAR POPUP — Sabit koyu, temadan bağımsız
+        ============================================================ */
+        #settings-modal {
+            background-color: #1a1a1a !important;
+            z-index: 999999 !important;
+        }
+        #settings-modal,
+        #settings-modal * {
+            color: #ffffff !important;
+        }
+
+        /* Genel popup butonları (font, spread, font size) */
+        #settings-modal button {
+            background-color: #333333 !important;
+            border: 1px solid #555555 !important;
+            padding: 4px 12px !important;
+            margin: 3px !important;
+            border-radius: 4px !important;
+            cursor: pointer;
+        }
+        #settings-modal button:hover {
+            background-color: #555555 !important;
+        }
+        #fontSizeDecrease,
+        #fontSizeIncrease {
+            padding: 8px 15px !important;
+            font-size: 18px !important;
+        }
+
+        /* ============================================================
+           TEMA BUTONLARI — her biri kendi renginde
+        ============================================================ */
+        #themes {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        /* "Choose a theme below:" etiket satırı */
+        #themes > br { display: none; }
+        #themes > span.theme-label {
+            width: 100%;
+            font-size: 0.82rem;
+            color: #aaaaaa !important;
+            margin-bottom: 2px;
+        }
+
+        /* Tema butonu temel stili — popup genel kuralını ezer */
+        button.theme-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 4px !important;
+            padding: 6px 13px !important;
+            border-radius: 6px !important;
+            border: 2px solid transparent !important;
+            font-size: 0.82rem !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            margin: 2px !important;
+            min-width: 68px;
+            transition: box-shadow 0.15s ease !important;
+        }
+
+        /* Her tema kendi rengiyle */
+        button#lightTheme.theme-btn {
+            background-color: #ffffff !important;
+            color: #333333 !important;
+            border-color: #bbbbbb !important;
+        }
+        button#darkTheme.theme-btn {
+            background-color: #202124 !important;
+            color: #eeeeee !important;
+            border-color: #555555 !important;
+        }
+        button#sepiaTheme.theme-btn {
+            background-color: #ece1ca !important;
+            color: #5b4636 !important;
+            border-color: #c8b49a !important;
+        }
+        button#amberTheme.theme-btn {
+            background-color: #e8bf5e !important;
+            color: #333333 !important;
+            border-color: #c9a030 !important;
+        }
+        button#blackTheme.theme-btn {
+            background-color: #000000 !important;
+            color: #cccccc !important;
+            border-color: #444444 !important;
+        }
+
+        /* Seçili tema belirgin hale gelir */
+        button.theme-btn.theme-active {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6) !important;
+        }
+        /* Açık zeminli temalar için koyu gölge */
+        button#lightTheme.theme-btn.theme-active,
+        button#sepiaTheme.theme-btn.theme-active,
+        button#amberTheme.theme-btn.theme-active {
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.35) !important;
+        }
+
+        /* ============================================================
+           MOBİL: ALTA SABİT SAĞ/SOL GEÇİŞ BUTONLARI
+        ============================================================ */
+        @media (max-width: 768px) {
+            /* Yan okları gizle */
+            #prev.arrow,
+            #next.arrow {
+                display: none !important;
+            }
+            /* Mobil nav göster */
+            #mobile-nav {
+                display: flex !important;
+            }
+        }
+
+        /* Masaüstünde gizli */
+        #mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 32px; /* read-footer yüksekliği */
+            left: 0;
+            right: 0;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .mobile-arrow-btn {
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(128, 128, 128, 0.18);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(128, 128, 128, 0.25);
+            font-size: 26px;
+            line-height: 1;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: background 0.15s ease, transform 0.1s ease;
+        }
+
+        .mobile-arrow-btn:active {
+            background: rgba(128, 128, 128, 0.38);
+            transform: scale(0.93);
+        }
+
+        /* ============================================================
+           OVERLAY
+        ============================================================ */
+        .overlay {
+            z-index: 999998 !important;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .md-show {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    </style>
 </head>
-
 
 <body>
     <div id="sidebar">
         <div id="panels">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <!--input id="searchBox" placeholder="search" type="search"-->
-
-            <!--a id="show-Search" class="show_view icon-search" data-view="Search">Search</a-->
             <a id="show-Toc" class="show_view icon-list-1 active" data-view="Toc">TOC</a>
             <a id="show-Bookmarks" class="show_view icon-bookmark" data-view="Bookmarks">Bookmarks</a>
-            <!--a id="show-Notes" class="show_view icon-edit" data-view="Notes">Notes</a-->
-
+            <a id="back-button" data-view="Back to Books" href="{{ url_for('web.index') }}">Books</a>
         </div>
-        <div id="tocView" class="view">
-        </div>
-        <!--div id="searchView" class="view">
-          <ul id="searchResults"></ul>
-        </div-->
+        <div id="tocView" class="view"></div>
         <div id="bookmarksView" class="view">
             <ul id="bookmarks"></ul>
         </div>
-        <!--div id="notesView" class="view">
-          <div id="new-note">
-            <textarea id="note-text"></textarea>
-            <button id="note-anchor">Anchor</button>
-          </div>
-          <ol id="notes"></ol>
-        </div-->
     </div>
-    <div id="main">
 
+    <div id="main">
         <div id="titlebar">
             <div id="opener">
-                <a id="slider" class="icon-menu">Menu</a>
-                <a href="/" class="glyphicon glyphicon-home">Home</a>
+                <a id="slider" class="icon-menu" title="Menü">Menu</a>
+                <a href="/" class="home-icon" title="Ana Sayfa">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </a>
             </div>
             <div id="metainfo">
-	            <span id="book-title"></span>
-	            <span id="title-seperator">&nbsp;&nbsp;–&nbsp;&nbsp;</span>
-	            <span id="chapter-title"></span>
-	        </div>
-	        <div id="title-controls">
-	            <a id="bookmark" class="icon-bookmark-empty">Bookmark</a>
-	            <a id="setting" class="icon-cog">Settings</a>
-	            <a id="fullscreen" class="icon-resize-full">Fullscreen</a>            
-	        </div>
-	    </div>
+                <span id="book-title"></span>
+                <span id="title-seperator">&nbsp;&nbsp;–&nbsp;&nbsp;</span>
+                <span id="chapter-title"></span>
+            </div>
+            <div id="title-controls">
+                <a id="bookmark" class="icon-bookmark-empty">Bookmark</a>
+                <a id="setting" class="icon-cog" title="Ayarlar">Settings</a>
+                <a id="fullscreen" class="icon-resize-full" title="Tam Ekran">Fullscreen</a>
+            </div>
+        </div>
 
-	    <div id="divider"></div>
-	    <div id="prev" class="arrow">‹</div>
-	    <div id="viewer"></div>
-	    <div id="next" class="arrow">›</div>
-	    <div id="progress">0%</div>
-	    <div id="loader"><img src="{{ url_for('static', filename='img/loader.gif') }}"></div>
-	</div>
+        <div id="divider"></div>
+        <div id="prev" class="arrow">‹</div>
+        <div id="viewer"></div>
+        <div id="next" class="arrow">›</div>
+
+        <!-- MOBİL ALT GEÇİŞ BUTONLARI -->
+        <div id="mobile-nav">
+            <button class="mobile-arrow-btn" id="mobile-prev" aria-label="Önceki sayfa">&#8249;</button>
+            <button class="mobile-arrow-btn" id="mobile-next" aria-label="Sonraki sayfa">&#8250;</button>
+        </div>
+
+        <div class="read-footer">
+            <div id="pages-count"></div>
+            <div id="progress">0%</div>
+        </div>
+
+        <div id="loader">
+            <img src="{{ url_for('static', filename='img/loader.gif') }}">
+        </div>
+    </div>
+
+    <!-- AYARLAR MODALI -->
     <div class="modal md-effect-1" id="settings-modal">
         <div class="md-content">
             <h3>{{_('Settings')}}</h3>
-            <div class="form-group themes" id="themes">
-                {{_('Choose a theme below:')}}}<br />
 
-                <!-- Hardcoded a tick in the light theme button because it is the "default" theme. Need to find a way to do this dynamically on startup-->
-                <button type="button" id="lightTheme" class="lightTheme" onclick="selectTheme(this.id)"><span
-                        id="lightSelected">✓</span>{{_('Light')}}</button>
-                <button type="button" id="darkTheme" class="darkTheme" onclick="selectTheme(this.id)"><span
-                        id="darkSelected"> </span>{{_('Dark')}}</button>
-                <button type="button" id="sepiaTheme" class="sepiaTheme" onclick="selectTheme(this.id)"><span
-                        id="sepiaSelected"> </span>{{_('Sepia')}}</button>
-                <button type="button" id="blackTheme" class="blackTheme" onclick="selectTheme(this.id)"><span
-                        id="blackSelected"> </span>{{_('Black')}}</button>
+            <!-- TEMA -->
+            <div class="form-group themes" id="themes">
+                <span class="theme-label">{{_('Choose a theme below:')}}</span>
+                <button type="button" id="lightTheme"  class="theme-btn" onclick="selectTheme(this.id)"><span id="lightSelected">✓</span> {{_('Light')}}</button>
+                <button type="button" id="darkTheme"   class="theme-btn" onclick="selectTheme(this.id)"><span id="darkSelected"></span> {{_('Dark')}}</button>
+                <button type="button" id="sepiaTheme"  class="theme-btn" onclick="selectTheme(this.id)"><span id="sepiaSelected"></span> {{_('Sepia')}}</button>
+                <button type="button" id="amberTheme"  class="theme-btn" onclick="selectTheme(this.id)"><span id="amberSelected"></span> {{_('Amber')}}</button>
+                <button type="button" id="blackTheme"  class="theme-btn" onclick="selectTheme(this.id)"><span id="blackSelected"></span> {{_('Black')}}</button>
             </div>
+
+            <!-- REFLOW -->
             <div class="form-group">
-                <p>
-                    <input type="checkbox" id="sidebarReflow"
-                        name="sidebarReflow">{{_('Reflow text when sidebars are open.')}}
-                </p>
+                <p><input type="checkbox" id="sidebarReflow" name="sidebarReflow">{{_('Reflow text when sidebars are open.')}}</p>
             </div>
+
+            <!-- YAZI BOYUTU -->
             <div class="form-group fontSizeWrapper">
-                <div class="slider">
-                    <label for="fader">{{ _('Font Sizes') }}</label>
-                    <input type="range" min="75" max="200" value="100" id="fontSizeFader" step="25">
-                </div>            
+                <label>{{ _('Font Size') }}</label>
+                <div style="display:flex; align-items:center; gap:10px; margin-top:4px;">
+                    <button type="button" id="fontSizeDecrease">−</button>
+                    <span id="fontSizeDisplay" style="min-width:60px; text-align:center; font-size:14px; font-weight:bold;">100%</span>
+                    <button type="button" id="fontSizeIncrease">+</button>
+                </div>
             </div>
-              <div class="font" id="font">
+
+            <!-- FONT -->
+            <div class="font" id="font">
                 <label class="item">{{_('Font')}}:</label>
-                <button type="button" id="default" onclick="selectFont(this.id)"><span>✓</span>{{_('Default')}}</button> 
-                <button type="button" id="Yahei" onclick="selectFont(this.id)"><span></span>{{_('Yahei')}}</button>
-                <button type="button" id="SimSun" onclick="selectFont(this.id)"><span></span>{{_('SimSun')}}</button>
-                <button type="button" id="KaiTi" onclick="selectFont(this.id)"><span></span>{{_('KaiTi')}}</button>
-                <button type="button" id="Arial" onclick="selectFont(this.id)"><span></span>{{_('Arial')}}</button>
-              </div>
-              <div class="layou" id="layout">
+                <button type="button" id="default" onclick="selectFont(this.id)"><span>✓</span>{{_('Default')}}</button>
+                <button type="button" id="Yahei"   onclick="selectFont(this.id)"><span></span>{{_('Yahei')}}</button>
+                <button type="button" id="SimSun"  onclick="selectFont(this.id)"><span></span>{{_('SimSun')}}</button>
+                <button type="button" id="KaiTi"   onclick="selectFont(this.id)"><span></span>{{_('KaiTi')}}</button>
+                <button type="button" id="Arial"   onclick="selectFont(this.id)"><span></span>{{_('Arial')}}</button>
+            </div>
+
+            <!-- SÜTUN DÜZENİ -->
+            <div class="layou" id="layout">
                 <label class="item">{{ _('Spread') }}:</label>
-                <button type="button" id="spread" onclick="spread(this.id)"><span>✓</span>{{_('Two columns')}}</button>
+                <button type="button" id="spread"     onclick="spread(this.id)"><span>✓</span>{{_('Two columns')}}</button>
                 <button type="button" id="nonespread" onclick="spread(this.id)"><span></span>{{_('One column')}}</button>
-              </div>            
+            </div>
+
             <div class="closer icon-cancel-circled"></div>
         </div>
     </div>
     <div class="overlay"></div>
+
+    <!-- SCRIPT SIRASI:
+         1. jquery.min.js      → $ tanımlanır
+         2. jszip + epub.min   → epub kütüphanesi hazır
+         3. Uygulama JS        → selectTheme, spread vb. tanımlanır
+         4. screenfull/reader/epub.js → window.reader başlar
+         5. $(document).ready  → reader hazır olunca tetiklenir
+    -->
     <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/compress/jszip_epub.min.js') }}">
-    </script>
+    <script src="{{ url_for('static', filename='js/compress/jszip_epub.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/libs/epub.min.js') }}"></script>
+
     <script type="text/javascript">
+        // ================================================================
+        // YAPILANDIRMA
+        // ================================================================
         window.calibre = {
-            filePath: "{{ url_for('static', filename='js/libs/') }}",
-            cssPath: "{{ url_for('static', filename='css/') }}",
+            filePath:    "{{ url_for('static', filename='js/libs/') }}",
+            cssPath:     "{{ url_for('static', filename='css/') }}",
             bookmarkUrl: "{{ url_for('web.set_bookmark', book_id=bookid, book_format=book_format) }}",
-            bookUrl: "{{ url_for('web.serve_book', book_id=bookid, book_format=book_format, anyname='file.epub') }}",
-            bookmark: "{{ bookmark.bookmark_key if bookmark != None }}",
-            useBookmarks: "{{ current_user.is_authenticated | tojson }}"
+            bookUrl:     "{{ url_for('web.serve_book', book_id=bookid, book_format=book_format, anyname='file.epub') }}",
+            bookmark:    "{{ bookmark.bookmark_key if bookmark != None }}",
+            useBookmarks:"{{ current_user.is_authenticated | tojson }}"
         };
 
+        // ================================================================
+        // TEMA HARİTASI
+        // ================================================================
         window.themes = {
+            "lightTheme": {
+                "bgColor": "#ffffff",
+                "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
+                "title-color": "#333333"
+            },
             "darkTheme": {
                 "bgColor": "#202124",
                 "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
-                "title-color": "#fff"
-            },
-            "lightTheme": {
-                "bgColor": "white",
-                "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
-                "title-color": "#4f4f4f"
+                "title-color": "#eeeeee"
             },
             "sepiaTheme": {
                 "bgColor": "#ece1ca",
                 "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
-                "title-color": "#4f4f4f"
+                "title-color": "#5b4636"
+            },
+            "amberTheme": {
+                "bgColor": "#e8bf5e",
+                "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
+                "title-color": "#333333"
             },
             "blackTheme": {
-                "bgColor": "black",
+                "bgColor": "#000000",
                 "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
-                "title-color": "#fff"
-            },
+                "title-color": "#cccccc"
+            }
         };
 
-        function selectTheme (id) {
-            let tickSpans = document.getElementById("themes").querySelectorAll("span");
+        // ================================================================
+        // TEMA UYGULAMA
+        // ================================================================
+        function selectTheme(id) {
+            // Tüm tikleri sıfırla
+            document.querySelectorAll("#themes span[id$='Selected']")
+                .forEach(function(sp) { sp.textContent = ""; });
 
-            // Remove tick mark from all theme buttons
-            tickSpans.forEach(function (tickSpan) {
-                document.getElementById(tickSpan.id).textContent = "";
+            // Seçili butona tik
+            var el = document.getElementById(id);
+            if (el) {
+                var sp = el.querySelector("span");
+                if (sp) sp.textContent = "✓";
+            }
+
+            // Aktif class
+            document.querySelectorAll(".theme-btn")
+                .forEach(function(btn) { btn.classList.remove("theme-active"); });
+            if (el) el.classList.add("theme-active");
+
+            localStorage.setItem("calibre.reader.theme", id);
+
+            // Epub'a uygula
+            try { reader.rendition.themes.select(id); } catch(e) {}
+
+            // Sayfa renklerini doğrudan ata
+            var cfg   = window.themes[id] || window.themes["lightTheme"];
+            var bg    = cfg["bgColor"];
+            var color = cfg["title-color"];
+
+            document.getElementById("main").style.backgroundColor = bg;
+            document.getElementById("titlebar").style.color = color;
+            document.getElementById("progress").style.color = color;
+
+            var prev = document.getElementById("prev");
+            var next = document.getElementById("next");
+            if (prev) prev.style.color = color;
+            if (next) next.style.color = color;
+
+            document.querySelectorAll(".home-icon svg path")
+                .forEach(function(p) { p.style.fill = color; });
+
+            // Mobil ok butonları rengi
+            var mPrev = document.getElementById("mobile-prev");
+            var mNext = document.getElementById("mobile-next");
+            if (mPrev) mPrev.style.color = color;
+            if (mNext) mNext.style.color = color;
+        }
+
+        // ================================================================
+        // YAZI BOYUTU
+        // ================================================================
+        var currentFontSize = 100;
+        var minFontSize = 50, maxFontSize = 300, stepSize = 5;
+
+        function updateFontSize(newSize) {
+            if (newSize < minFontSize) newSize = minFontSize;
+            if (newSize > maxFontSize) newSize = maxFontSize;
+            currentFontSize = newSize;
+            var disp = document.getElementById("fontSizeDisplay");
+            if (disp) disp.textContent = newSize + "%";
+            localStorage.setItem("calibre.reader.fontSize", newSize);
+            try {
+                if (window.reader && reader.rendition) reader.rendition.themes.fontSize(newSize + "%");
+            } catch(e) {}
+        }
+
+        (function() {
+            var saved = localStorage.getItem("calibre.reader.fontSize");
+            if (saved) {
+                currentFontSize = parseInt(saved);
+                var disp = document.getElementById("fontSizeDisplay");
+                if (disp) disp.textContent = saved + "%";
+            }
+            var dec = document.getElementById("fontSizeDecrease");
+            var inc = document.getElementById("fontSizeIncrease");
+            if (dec) dec.addEventListener("click", function() { updateFontSize(currentFontSize - stepSize); });
+            if (inc) inc.addEventListener("click", function() { updateFontSize(currentFontSize + stepSize); });
+        })();
+
+        // ================================================================
+        // FONT SEÇİMİ
+        // ================================================================
+        var defaultFont;
+        window.selectFont = function(id) {
+            if (!defaultFont) {
+                try { defaultFont = reader.rendition.getContents()[0]?.css("font-family"); } catch(e) {}
+            }
+            document.getElementById("font").querySelectorAll("span")
+                .forEach(function(sp) { sp.textContent = ""; });
+            document.getElementById(id).querySelector("span").textContent = "✓";
+            localStorage.setItem("calibre.reader.font", id);
+            try { reader.rendition.themes.font(id === "default" ? defaultFont : id); } catch(e) {}
+        };
+
+        // ================================================================
+        // SÜTUN DÜZENİ
+        // ================================================================
+        function spread(id) {
+            document.getElementById("layout").querySelectorAll("span")
+                .forEach(function(sp) { sp.textContent = ""; });
+            document.getElementById(id).querySelector("span").textContent = "✓";
+            localStorage.setItem("calibre.reader.spread", id);
+            try { reader.rendition.spread(id === "spread" ? true : "none"); } catch(e) {}
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='js/libs/screenfull.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libs/reader.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/reading/epub.js') }}"></script>
+
+    <!-- Bu blok jQuery yüklendikten SONRA: $ is not defined hatası olmaz -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            // Mobil ok butonları — mevcut #prev/#next click'i tetikler
+            document.getElementById('mobile-prev').addEventListener('click', function() {
+                document.getElementById('prev').click();
+            });
+            document.getElementById('mobile-next').addEventListener('click', function() {
+                document.getElementById('next').click();
             });
 
-            // Add tick mark to the button corresponding to the currently selected theme
-            document.getElementById(id).querySelector("span").textContent = "✓";
+            // Modal aç
+            $('#setting').on('click', function(e) {
+                e.preventDefault();
+                $('#settings-modal').addClass('md-show');
+                $('.overlay').show().css('opacity', 1);
+            });
 
-            // Saving theme to local storage
-            localStorage.setItem("calibre.reader.theme", id);
-            
-            // Apply theme to epubjs iframe
-            reader.rendition.themes.select(id);
+            // Modal kapat
+            $('.closer, .overlay').on('click', function() {
+                $('#settings-modal').removeClass('md-show');
+                $('.overlay').hide().css('opacity', 0);
+            });
 
-            // Apply theme to rest of the page. 
-            document.getElementById("main").style.backgroundColor = themes[id]["bgColor"];
-            document.getElementById("titlebar").style.color = themes[id]["title-color"] || "#fff";
-            document.getElementById("progress").style.color = themes[id]["title-color"] || "#fff";
-        }
+            // Reader yükleme döngüsü
+            var checkCount = 0;
+            var loadInterval = setInterval(function() {
+                checkCount++;
 
-        // font size settings logic
-        let fontSizeFader = document.getElementById('fontSizeFader');
-        fontSizeFader.addEventListener("change", function () {
-            reader.rendition.themes.fontSize(`${this.value}%`);
+                if (window.reader && window.reader.rendition) {
+                    clearInterval(loadInterval);
+                    $('#loader').hide();
+
+                    try {
+                        if (window.calibre.bookmark) {
+                            reader.rendition.display(window.calibre.bookmark);
+                        }
+
+                        var savedSize = localStorage.getItem("calibre.reader.fontSize");
+                        if (savedSize) updateFontSize(parseInt(savedSize));
+
+                        spread(localStorage.getItem("calibre.reader.spread") || "spread");
+
+                        var savedFont = localStorage.getItem("calibre.reader.font");
+                        if (savedFont) { try { selectFont(savedFont); } catch(e) {} }
+
+                        selectTheme(localStorage.getItem("calibre.reader.theme") || "lightTheme");
+
+                        reader.rendition.on('relocated', function(location) {
+                            $.ajax({
+                                url: window.calibre.bookmarkUrl,
+                                type: 'POST',
+                                headers: { 'X-CSRFToken': $('input[name="csrf_token"]').val() },
+                                data: { bookmark: location.start.cfi }
+                            });
+                        });
+
+                    } catch(e) { console.log(e); }
+                }
+
+                if (checkCount > 20) {
+                    clearInterval(loadInterval);
+                    $('#loader').hide();
+                }
+
+            }, 500);
         });
-
-        let defaultFont;
-
-        function selectFont(id) {
-          if (!defaultFont) {
-            defaultFont = reader.rendition.getContents()[0]?.css('font-family');
-          }
-
-          spans = document.getElementById("font").querySelectorAll("span");
-          for(var i = 0; i < spans.length; i++) {
-            spans[i].textContent = "";
-          }
-          document.getElementById(id).querySelector("span").textContent = "✓";
-          
-          if (id == 'default') {
-            reader.rendition.themes.font(defaultFont);
-            return;
-          }
-          reader.rendition.themes.font(id);
-        }
-
-        function spread(id) {
-          spans = document.getElementById("layout").querySelectorAll("span");
-          for(var i = 0; i < spans.length; i++) {
-            spans[i].textContent = "";
-          }
-          document.getElementById(id).querySelector("span").textContent = "✓";
-          reader.rendition.spread(id==='spread'?true:'none');
-        }
-      </script>
-      <script src="{{ url_for('static', filename='js/libs/screenfull.min.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/libs/reader.min.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/reading/epub.js') }}"></script>
-
-      <script src="{{ url_for('static', filename='js/customs/storage.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/customs/reader_tracker.js') }}"></script>
-
-    </body>
+    </script>
+</body>
 </html>
