@@ -599,6 +599,82 @@
 
                         selectTheme(localStorage.getItem("calibre.reader.theme") || "lightTheme");
 
+                        // ══════════════════════════════════════════════════
+                        // FTS NAVIGASYON
+                        // Arama sayfasındaki "Open" butonu URL'e şunları ekler:
+                        //   ?fts_q=<terim>&fts_chapter=<href>&fts_para=<idx>
+                        // Bu kod ilgili bölüme gider, terimi bulur ve vurgular.
+                        // ══════════════════════════════════════════════════
+                        (function ftsNavigate() {
+                            try {
+                                var params     = new URLSearchParams(window.location.search);
+                                var ftsChapter = params.get('fts_chapter');
+                                var ftsQ       = (params.get('fts_q') || '').toLowerCase().trim();
+                                var ftsPara    = parseInt(params.get('fts_para') || '-1', 10);
+
+                                if (!ftsChapter) return;
+
+                                // epub.js spine içinde eşleşen bölümü bul
+                                var spineItems = reader.book.spine.spineItems;
+                                var target     = null;
+                                var chBasename = ftsChapter.split('/').pop();
+
+                                for (var i = 0; i < spineItems.length; i++) {
+                                    var item = spineItems[i];
+                                    var h    = (item.href || item.url || '').split('?')[0];
+                                    if (h === ftsChapter || h.endsWith('/' + ftsChapter) ||
+                                        h.endsWith('/' + chBasename) || h === chBasename) {
+                                        target = item;
+                                        break;
+                                    }
+                                }
+
+                                if (!target) {
+                                    console.warn('FTS: chapter not found in spine:', ftsChapter);
+                                    return;
+                                }
+
+                                // Bölüme git
+                                reader.rendition.display(target.href).then(function () {
+                                    if (!ftsQ) return;
+
+                                    // Bölüm renderlanınca terimi bul ve vurgula
+                                    setTimeout(function () {
+                                        try {
+                                            reader.rendition.getContents().forEach(function (c) {
+                                                var doc = c.document;
+                                                if (!doc) return;
+
+                                                var walker = doc.createTreeWalker(
+                                                    doc.body, NodeFilter.SHOW_TEXT, null, false
+                                                );
+                                                var found = false;
+                                                var node;
+                                                while ((node = walker.nextNode()) && !found) {
+                                                    if (node.textContent.toLowerCase().indexOf(ftsQ) !== -1) {
+                                                        var el = node.parentElement;
+                                                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                        var orig = el.style.backgroundColor;
+                                                        el.style.transition = 'background-color 0.4s ease';
+                                                        el.style.backgroundColor = '#ffe500';
+                                                        setTimeout(function () {
+                                                            el.style.backgroundColor = orig;
+                                                        }, 2500);
+                                                        found = true;
+                                                    }
+                                                }
+                                            });
+                                        } catch (e) {
+                                            console.warn('FTS highlight error:', e);
+                                        }
+                                    }, 500);
+                                });
+
+                            } catch (e) {
+                                console.warn('FTS navigate error:', e);
+                            }
+                        })();
+
                         reader.rendition.on('relocated', function(location) {
                             $.ajax({
                                 url: window.calibre.bookmarkUrl,
