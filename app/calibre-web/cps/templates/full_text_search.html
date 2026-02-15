@@ -1,0 +1,329 @@
+{% extends "layout.html" %}
+{% block header %}
+<style>
+  /* ── GENEL ── */
+  .fts-header { margin-bottom: 20px; }
+  .fts-search-form {
+    display: flex; gap: 8px; align-items: center;
+    margin-bottom: 12px; flex-wrap: wrap;
+  }
+  .fts-search-form input[type="text"] {
+    flex: 1; min-width: 220px; max-width: 520px;
+  }
+  .fts-summary { color: #555; font-size: 0.91em; margin-bottom: 16px; }
+  .fts-summary strong { color: #222; }
+
+  /* ── UYARI BANNER ── */
+  #fts-loading { display: none; }
+  #fts-loading.active {
+    display: flex; align-items: flex-start; gap: 18px;
+    border: 2px solid #e6a817; border-radius: 10px;
+    background: #fffbf0; padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(230,168,23,.18);
+  }
+  .fts-loading-icon-wrap {
+    flex-shrink: 0;
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff3cd; border: 2px solid #e6a817;
+  }
+  .fts-loading-icon-wrap .glyphicon {
+    font-size: 1.7em; color: #c07800;
+    animation: fts-spin 1.1s linear infinite;
+  }
+  @keyframes fts-spin { to { transform: rotate(360deg); } }
+  .fts-loading-body { flex: 1; }
+  .fts-loading-title {
+    font-size: 1.08em; font-weight: 700; color: #7a5200; margin: 0 0 6px;
+  }
+  .fts-loading-desc {
+    font-size: 0.91em; color: #8a6000; margin: 0 0 10px; line-height: 1.55;
+  }
+  .fts-loading-warning {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: #c0392b; color: #fff;
+    font-size: 0.88em; font-weight: 700;
+    padding: 7px 14px; border-radius: 6px;
+  }
+
+  /* ── KİTAP KARTI ── */
+  .fts-book-card {
+    border: 1px solid #dde3ea; border-radius: 8px;
+    margin-bottom: 14px; background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,.07); overflow: hidden;
+  }
+
+  /* Tıklanabilir accordion başlığı (sorun 3) */
+  .fts-book-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 16px;
+    background: #f4f7fb; border-bottom: 1px solid #dde3ea;
+    cursor: pointer; user-select: none;
+    transition: background 0.15s;
+  }
+  .fts-book-header:hover  { background: #eaf0fa; }
+  .fts-book-header.open   { background: #e2ecf8; border-bottom-color: #c5d8f0; }
+
+  .fts-book-cover {
+    width: 44px; height: 62px; object-fit: cover;
+    border-radius: 3px; border: 1px solid #ccc; flex-shrink: 0;
+  }
+  .fts-book-cover-placeholder {
+    width: 44px; height: 62px; background: #d5dce8; border-radius: 3px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .fts-book-info { flex: 1; min-width: 0; }
+  .fts-book-title {
+    font-size: 1em; font-weight: 700; color: #1a2540;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;
+  }
+  .fts-book-title a { color: inherit; text-decoration: none; }
+  .fts-book-title a:hover { color: #0057c2; text-decoration: underline; }
+  .fts-book-author { font-size: 0.84em; color: #6b7a99; }
+  .fts-header-right {
+    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  }
+  .fts-hit-badge {
+    background: #1a6fce; color: #fff;
+    font-size: 0.78em; font-weight: 700;
+    padding: 3px 10px; border-radius: 12px; white-space: nowrap;
+  }
+  .fts-chevron {
+    font-size: 0.9em; color: #6b7a99; transition: transform 0.2s;
+  }
+  .fts-book-header.open .fts-chevron { transform: rotate(180deg); }
+
+  /* Hit listesi — varsayılan KAPALI (sorun 3) */
+  .fts-hits-body {
+    display: none; list-style: none; margin: 0; padding: 0;
+  }
+  .fts-hits-body.expanded { display: block; }
+
+  .fts-hit-item {
+    padding: 9px 16px; border-bottom: 1px solid #f0f3f8;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .fts-hit-item:last-child { border-bottom: none; }
+
+  .fts-hit-chapter {
+    font-size: 0.76em; color: #8fa3c0;
+    flex-shrink: 0; min-width: 80px; max-width: 150px;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+    padding-top: 3px;
+  }
+  .fts-hit-snippet {
+    font-size: 0.87em; color: #3a4a60; line-height: 1.55; flex: 1;
+  }
+  .fts-hit-snippet mark {
+    background: #ffe500; color: #1a2540;
+    padding: 0 2px; border-radius: 2px;
+  }
+  .fts-hit-link {
+    flex-shrink: 0;
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.8em; color: #1a6fce;
+    text-decoration: none; white-space: nowrap;
+    padding: 3px 8px; border: 1px solid #c2d5f0; border-radius: 4px;
+    transition: background 0.12s;
+  }
+  .fts-hit-link:hover { background: #e8f0fb; text-decoration: none; }
+
+  /* ── Yüzen "Başa Dön" butonu — FTS sayfasında HER ZAMAN görünür ── */
+  #fts-back-top {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    display: flex;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #1a6fce; color: #fff; border: none;
+    box-shadow: 0 3px 12px rgba(26,111,206,.45);
+    cursor: pointer; font-size: 1.1em;
+    align-items: center; justify-content: center;
+    transition: background 0.15s, transform 0.15s, opacity 0.2s;
+    opacity: 0.35;
+  }
+  #fts-back-top:hover { background: #0d52a8; transform: translateY(-2px); opacity: 1; }
+  #fts-back-top.scrolled { opacity: 1; }
+
+  /* ── BOŞ DURUM ── */
+  .fts-empty {
+    text-align: center; padding: 60px 20px; color: #b0bcc8;
+  }
+  .fts-empty .glyphicon { font-size: 3em; margin-bottom: 14px; display: block; }
+  .fts-empty h4 { color: #7a8fa8; margin-bottom: 8px; }
+</style>
+{% endblock %}
+
+{% block body %}
+<!-- Yüzen "Yukarı Çık" butonu — tümünü göster açıkken görünür -->
+<button id="fts-back-top" title="{{ _('Back to top') }}" onclick="ftsScrollTop()">
+  <span class="glyphicon glyphicon-chevron-up"></span>
+</button>
+
+<div class="fts-header">
+  <h2>
+    <span class="glyphicon glyphicon-book"></span>
+    {{ _('Search in Books') }}
+  </h2>
+
+  <!-- Arama formu -->
+  <form class="fts-search-form" id="fts-form"
+        action="{{ url_for('search.full_text_search') }}" method="GET">
+    <input type="text" class="form-control"
+           name="q" id="fts-query"
+           placeholder="{{ _('Type a word or phrase to search inside all EPUB books…') }}"
+           value="{{ searchterm }}"
+           autofocus>
+    <button type="submit" class="btn btn-primary">
+      <span class="glyphicon glyphicon-search"></span>
+      {{ _('Search') }}
+    </button>
+    {% if searchterm %}
+    <a href="{{ url_for('search.full_text_search') }}" class="btn btn-default">
+      {{ _('Clear') }}
+    </a>
+    {% endif %}
+  </form>
+
+  {% if searchterm %}
+  <div class="fts-summary">
+    {% if total_hits > 0 %}
+      <strong>{{ total_hits }}</strong> {{ _('match(es) found in') }}
+      <strong>{{ total_books }}</strong> {{ _('book(s)') }}
+      {{ _('for') }} &ldquo;<strong>{{ searchterm }}</strong>&rdquo;
+    {% else %}
+      {{ _('No results found for') }} &ldquo;<strong>{{ searchterm }}</strong>&rdquo;.
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+
+<!-- UYARI BANNER — form submit anında gösterilir -->
+<div id="fts-loading">
+  <div class="fts-loading-icon-wrap">
+    <span class="glyphicon glyphicon-refresh"></span>
+  </div>
+  <div class="fts-loading-body">
+    <div class="fts-loading-title">{{ _('Searching inside books…') }}</div>
+    <p class="fts-loading-desc">
+      {{ _('All EPUB files are being scanned. This may take several minutes depending on the size of your library.') }}
+    </p>
+    <span class="fts-loading-warning">
+      <span class="glyphicon glyphicon-warning-sign"></span>
+      {{ _('Please do not close or refresh this page!') }}
+    </span>
+  </div>
+</div>
+
+<!-- SONUÇLAR -->
+{% if searchterm and results %}
+  {% for result in results %}
+  <div class="fts-book-card">
+
+    <!-- Accordion başlığı — tıklanınca açılır/kapanır (sorun 3) -->
+    <div class="fts-book-header" onclick="toggleCard(this)">
+
+      {% if result.book.has_cover %}
+        <img class="fts-book-cover"
+             src="{{ url_for('web.get_cover', book_id=result.book_id, resolution='sm') }}"
+             alt="{{ result.book_title }}">
+      {% else %}
+        <div class="fts-book-cover-placeholder">
+          <span class="glyphicon glyphicon-book" style="color:#9aaec8;font-size:1.3em;"></span>
+        </div>
+      {% endif %}
+
+      <div class="fts-book-info">
+        <div class="fts-book-title">
+          <a href="{{ url_for('web.show_book', book_id=result.book_id) }}"
+             onclick="event.stopPropagation()">
+            {{ result.book_title }}
+          </a>
+        </div>
+        <div class="fts-book-author">{{ result.authors }}</div>
+      </div>
+
+      <div class="fts-header-right">
+        <span class="fts-hit-badge">{{ result.hit_count }} {{ _('match(es)') }}</span>
+        <span class="glyphicon glyphicon-chevron-down fts-chevron"></span>
+      </div>
+    </div>
+
+    <!-- Hit listesi — varsayılan kapalı (sorun 3) -->
+    <ul class="fts-hits-body" id="hits-{{ result.book_id }}">
+      {% for hit in result.hits %}
+      <li class="fts-hit-item">
+
+        <!-- Bölüm adı (sorun 4: chapter_title artık h1/h2/h3'ten geliyor) -->
+        <span class="fts-hit-chapter" title="{{ hit.chapter_title }}">
+          {{ hit.chapter_title | truncate(26, True) }}
+        </span>
+
+        <!-- Snippet (sorun 2: sadece leaf paragraph) -->
+        <span class="fts-hit-snippet">{{ hit.snippet | safe }}</span>
+
+        <!-- Open linki — URL param olarak gönderilir, reader.js parse eder (sorun 5) -->
+        <a class="fts-hit-link"
+           href="{{ url_for('web.read_book', book_id=result.book_id, book_format='epub') }}?fts_q={{ searchterm | urlencode }}&fts_chapter={{ hit.chapter_href | urlencode }}&fts_para={{ hit.para_index }}"
+           title="{{ _('Open this location in reader') }}"
+           onclick="event.stopPropagation()">
+          <span class="glyphicon glyphicon-new-window"></span>
+          {{ _('Open') }}
+        </a>
+
+      </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+  {% endfor %}
+
+{% elif searchterm and not results %}
+  <div class="fts-empty">
+    <span class="glyphicon glyphicon-search"></span>
+    <h4>{{ _('No results found') }}</h4>
+    <p>{{ _('Try a different search term, or make sure your books are in EPUB format.') }}</p>
+  </div>
+
+{% elif not searchterm %}
+  <div class="fts-empty">
+    <span class="glyphicon glyphicon-book"></span>
+    <h4>{{ _('Search inside your EPUB books') }}</h4>
+    <p>{{ _('Enter a word or phrase above to find all occurrences across your entire library.') }}</p>
+  </div>
+{% endif %}
+
+{% endblock %}
+
+{% block js %}
+<script>
+  /* Form submit → uyarı banner'ı göster */
+  document.getElementById('fts-form').addEventListener('submit', function () {
+    var q = document.getElementById('fts-query').value.trim();
+    if (q) document.getElementById('fts-loading').classList.add('active');
+  });
+
+  /* Accordion: kitap başlığına tıklayınca hit listesini aç/kapat */
+  function toggleCard(header) {
+    var body   = header.nextElementSibling;
+    var isOpen = body.classList.toggle('expanded');
+    header.classList.toggle('open', isOpen);
+  }
+
+  /* Yüzen "Yukarı" butonu — baştan görünür, scroll'da tam opaklık */
+  var backTopBtn = document.getElementById('fts-back-top');
+
+  function ftsScrollTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.addEventListener('scroll', function() {
+    backTopBtn.classList.toggle('scrolled', window.scrollY > 150);
+  }, { passive: true });
+
+  /* İlk sonucu otomatik aç */
+  (function () {
+    var first = document.querySelector('.fts-book-header');
+    if (first) toggleCard(first);
+  })();
+</script>
+{% endblock %}

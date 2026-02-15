@@ -103,6 +103,16 @@
             color: #ffffff !important;
         }
 
+        /* Tüm etiket ve checkbox metinleri — Font:/Spread: ile aynı boyut */
+        #settings-modal label,
+        #settings-modal label.item,
+        #settings-modal p,
+        #settings-modal .form-group p {
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            color: #ffffff !important;
+        }
+
         /* Genel popup butonları (font, spread, font size) */
         #settings-modal button {
             background-color: #333333 !important;
@@ -135,9 +145,11 @@
         #themes > br { display: none; }
         #themes > span.theme-label {
             width: 100%;
-            font-size: 0.82rem;
-            color: #aaaaaa !important;
-            margin-bottom: 2px;
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            color: #dddddd !important;
+            margin-bottom: 6px;
+            display: block;
         }
 
         /* Tema butonu temel stili — popup genel kuralını ezer */
@@ -149,7 +161,7 @@
             padding: 6px 13px !important;
             border-radius: 6px !important;
             border: 2px solid transparent !important;
-            font-size: 0.82rem !important;
+            font-size: 1rem !important;
             font-weight: 700 !important;
             cursor: pointer !important;
             margin: 2px !important;
@@ -352,7 +364,7 @@
 
             <!-- FONT -->
             <div class="font" id="font">
-                <label class="item">{{_('Font')}}:</label>
+                <label class="item">{{_('Font:')}}</label>
                 <button type="button" id="default" onclick="selectFont(this.id)"><span>✓</span>{{_('Default')}}</button>
                 <button type="button" id="Yahei"   onclick="selectFont(this.id)"><span></span>{{_('Yahei')}}</button>
                 <button type="button" id="SimSun"  onclick="selectFont(this.id)"><span></span>{{_('SimSun')}}</button>
@@ -362,7 +374,7 @@
 
             <!-- SÜTUN DÜZENİ -->
             <div class="layou" id="layout">
-                <label class="item">{{ _('Spread') }}:</label>
+                <label class="item">{{ _('Spread:') }}</label>
                 <button type="button" id="spread"     onclick="spread(this.id)"><span>✓</span>{{_('Two columns')}}</button>
                 <button type="button" id="nonespread" onclick="spread(this.id)"><span></span>{{_('One column')}}</button>
             </div>

@@ -454,21 +454,7 @@ def render_books_list(data, sort_param, book_id, page):
                 # Kitapları tekrar bookmark sırasına (en yeniden eskiye) dizmek için küçük bir sözlük numarası yapıyoruz:
                 books_dict = {book.id: book for book in books_query}
                 last_read_books = [books_dict[bid] for bid in book_ids if bid in books_dict]
-                # --- Başlık Çevirisi Mantığı ---
-                # Kullanıcının o anki dil kodunu alıyoruz (tr, ru, uk, en vb.)
-                current_lang = str(get_locale())[:2] 
-                
-                # Dil sözlüğümüzü oluşturuyoruz
-                titles = {
-                    'tr': 'Son Okunanlar',
-                    'uk': 'Останні прочитані',     # Ukraynaca
-                    'ru': 'Недавно прочитанные',   # Rusça
-                    'en': 'Recently Read Books'    # İngilizce/Varsayılan
-                }
-                
-                # Eğer sözlükte o dil varsa onu al, yoksa İngilizceyi kullan
-                last_read_title = titles.get(current_lang, 'Recently Read Books')
-                # -------------------------------
+                last_read_title = _('Recently Read Books')
         # ------------------------------------------------
         return render_title_template('index.html', random=random, entries=entries, pagination=pagination,
                                      title=_("Books"), page=website, order=order[1], 
@@ -1585,6 +1571,34 @@ def change_profile(kobo_support, local_oauth_check, oauth_status, translations, 
         ub.session.rollback()
         log.error("Database error: %s", e)
         flash(_("Oops! Database Error: %(error)s.", error=e), category="error")
+
+
+@web.route("/set_locale/<locale_code>", methods=["GET"])
+def set_locale(locale_code):
+    """
+    Navbar dil seçicisinden çağrılır.
+    - Giriş yapmış kullanıcı: locale DB'ye kaydedilir (kalıcı)
+    - Anonim kullanıcı: locale 1 yıllık cookie + session'a kaydedilir
+    """
+    allowed = {"en", "tr", "ru", "uk"}
+    if locale_code not in allowed:
+        locale_code = "en"
+
+    next_url = request.referrer or url_for("web.index")
+    resp = redirect(next_url)
+
+    if current_user.is_authenticated and not current_user.is_anonymous:
+        current_user.locale = locale_code
+        try:
+            ub.session.commit()
+        except Exception as e:
+            ub.session.rollback()
+            log.error("set_locale DB error: %s", e)
+
+    resp.set_cookie("locale", locale_code, max_age=365 * 24 * 3600,
+                    samesite="Lax", httponly=False)
+    flask_session["locale"] = locale_code
+    return resp
 
 
 @web.route("/me", methods=["GET", "POST"])

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">19</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">99947c55-4986-491f-b3ae-b6b0d84f6ae6</dc:identifier>
+        <dc:title>MUCIZAT-I AHMEDİYE RİSALESİ</dc:title>
+        <dc:creator opf:file-as="Nursi, Bediüzzaman Said" opf:role="aut">Bediüzzaman Said Nursi</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (8.11.1) [https://calibre-ebook.com]</dc:contributor>
+        <dc:date>0101-01-01T00:00:00+00:00</dc:date>
+        <dc:publisher>Envar Neşriyat</dc:publisher>
+        <dc:language>tur</dc:language>
+        <meta name="calibre:timestamp" content="2026-02-09T20:28:46.051699+00:00"/>
+        <meta name="calibre:title_sort" content="MUCIZAT-I AHMEDİYE RİSALESİ"/>
+    </metadata>
+    <guide>
+        <reference type="cover" title="Kapak" href="cover.jpg"/>
+    </guide>
+</package>

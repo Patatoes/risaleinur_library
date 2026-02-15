@@ -17,7 +17,7 @@
 import json
 from datetime import datetime
 
-from flask import Blueprint, request, redirect, url_for, flash
+from flask import Blueprint, request, redirect, url_for, flash, jsonify
 from flask import session as flask_session
 from .cw_login import current_user
 from flask_babel import format_date
@@ -30,6 +30,7 @@ from .string_helper import strip_whitespaces
 from .usermanagement import login_required_if_no_ano
 from .render_template import render_title_template
 from .pagination import Pagination
+from . import epub_search
 
 
 search = Blueprint('search', __name__)
@@ -51,24 +52,39 @@ def simple_search():
                                      page="search")
 
 
-@search.route("/advsearch", methods=['POST'])
+@search.route("/advsearch", methods=['GET', 'POST'])
 @login_required_if_no_ano
 def advanced_search():
-    values = dict(request.form)
-    params = ['include_tag', 'exclude_tag', 'include_serie', 'exclude_serie', 'include_shelf', 'exclude_shelf',
-              'include_language', 'exclude_language', 'include_extension', 'exclude_extension']
-    for param in params:
-        values[param] = list(request.form.getlist(param))
-    flask_session['query'] = json.dumps(values)
-    return redirect(url_for('web.books_list', data="advsearch", sort_param='stored', query=""))
+    return redirect(url_for('search.full_text_search'))
 
 
 @search.route("/advsearch", methods=['GET'])
 @login_required_if_no_ano
 def advanced_search_form():
-    # Build custom columns names
-    cc = calibre_db.get_cc_columns(config, filter_config_custom_read=True)
-    return render_prepare_search_form(cc)
+    return redirect(url_for('search.full_text_search'))
+
+
+@search.route("/full_text_search", methods=["GET"])
+@login_required_if_no_ano
+def full_text_search():
+    """Ana sayfadaki kitap-içi tam metin arama."""
+    term = request.args.get("q", "").strip()
+    if not term:
+        return render_title_template('full_text_search.html',
+                                     searchterm="",
+                                     results=[],
+                                     total_books=0,
+                                     total_hits=0,
+                                     title=_("Search in Books"),
+                                     page="fts")
+    results, total_hits = epub_search.search_in_epubs(term, config.config_calibre_dir, calibre_db)
+    return render_title_template('full_text_search.html',
+                                 searchterm=term,
+                                 results=results,
+                                 total_books=len(results),
+                                 total_hits=total_hits,
+                                 title=_("Search in Books"),
+                                 page="fts")
 
 
 def adv_search_custom_columns(cc, term, q):
@@ -371,35 +387,7 @@ def render_adv_search_results(term, offset=None, order=None, limit=None):
                                  order=order[1])
 
 
-def render_prepare_search_form(cc):
-    # prepare data for search-form
-    tags = calibre_db.session.query(db.Tags)\
-        .join(db.books_tags_link)\
-        .join(db.Books)\
-        .filter(calibre_db.common_filters()) \
-        .group_by(text('books_tags_link.tag'))\
-        .order_by(db.Tags.name).all()
-    series = calibre_db.session.query(db.Series)\
-        .join(db.books_series_link)\
-        .join(db.Books)\
-        .filter(calibre_db.common_filters()) \
-        .group_by(text('books_series_link.series'))\
-        .order_by(db.Series.name)\
-        .filter(calibre_db.common_filters()).all()
-    shelves = ub.session.query(ub.Shelf)\
-        .filter(or_(ub.Shelf.is_public == 1, ub.Shelf.user_id == int(current_user.id)))\
-        .order_by(ub.Shelf.name).all()
-    extensions = calibre_db.session.query(db.Data)\
-        .join(db.Books)\
-        .filter(calibre_db.common_filters()) \
-        .group_by(db.Data.format)\
-        .order_by(db.Data.format).all()
-    if current_user.filter_language() == "all":
-        languages = calibre_db.speaking_language()
-    else:
-        languages = None
-    return render_title_template('search_form.html', tags=tags, languages=languages, extensions=extensions,
-                                 series=series,shelves=shelves, title=_("Advanced Search"), cc=cc, page="advsearch")
+# render_prepare_search_form kaldırıldı — full_text_search ile değiştirildi
 
 
 def render_search_results(term, offset=None, order=None, limit=None):
@@ -426,5 +414,3 @@ def render_search_results(term, offset=None, order=None, limit=None):
                                  title=_("Search"),
                                  page="search",
                                  order=order[1])
-
-

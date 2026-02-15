@@ -3684,3 +3684,56 @@ msgstr ""
 msgid "Show Read/Unread Section"
 msgstr "Seri seçimini göster"
 
+msgid "Search in Books"
+msgstr "Kitaplarda Ara"
+
+msgid "Search inside your EPUB books"
+msgstr "EPUB kitaplarınızın içinde arayın"
+
+msgid "Enter a word or phrase to search inside all EPUB books…"
+msgstr "Tüm EPUB kitaplarında aramak için bir sözcük veya ifade girin…"
+
+msgid "Clear"
+msgstr "Temizle"
+
+msgid "No results found"
+msgstr "Sonuç bulunamadı"
+
+msgid "No results found for"
+msgstr "Bulunamadı:"
+
+msgid "Try a different search term, or make sure your books are in EPUB format."
+msgstr "Farklı bir arama terimi deneyin veya kitaplarınızın EPUB formatında olduğundan emin olun."
+
+msgid "Enter a word or phrase above to find all occurrences across your entire library."
+msgstr "Tüm kitaplığınızda aramak için yukarıya bir sözcük veya ifade girin."
+
+msgid "Make sure the books are in EPUB format and contain the search term."
+msgstr "Kitapların EPUB formatında olduğundan ve arama terimini içerdiğinden emin olun."
+
+msgid "match(es) found in"
+msgstr "eşleşme bulundu:"
+
+msgid "match(es)"
+msgstr "eşleşme"
+
+msgid "book(s)"
+msgstr "kitap"
+
+msgid "for"
+msgstr "için"
+
+msgid "Open"
+msgstr "Aç"
+
+msgid "Open this location in reader"
+msgstr "Bu konumu okuyucuda aç"
+
+msgid "+ %(count)d more match(es) not shown"
+msgstr "+ %(count)d eşleşme daha gösterilmiyor"
+
+msgid "Searching inside books, please wait…"
+msgstr "Kitaplarda aranıyor, lütfen bekleyin…"
+
+msgid "Interface Language"
+msgstr "Arayüz Dili"

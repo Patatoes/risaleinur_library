@@ -22,6 +22,33 @@
        <link href="{{ url_for('static', filename='css/caliBlur.css') }}" rel="stylesheet" media="screen">
        <link href="{{ url_for('static', filename='css/caliBlur_override.css') }}" rel="stylesheet" media="screen">
     {% endif %}
+    <style>
+      /* Navbar dil seçici kısa kod etiketi */
+      #locale-switcher .locale-flag {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        background: #e8e8e8;
+        color: #333;
+        border-radius: 3px;
+        padding: 1px 5px;
+        vertical-align: middle;
+        margin-right: 2px;
+      }
+      #locale-switcher > a {
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+      #locale-switcher .dropdown-menu {
+        min-width: 175px;
+      }
+      #locale-switcher .dropdown-menu li.active > a {
+        background-color: #f5f5f5;
+        color: #333;
+        font-weight: 600;
+      }
+    </style>
   </head>
   <body class="{{ page }} {{ bodyClass }}{% if g.current_theme == 1 %} blur{% endif %}" data-text="{{_('Home')}}" data-textback="{{_('Back')}}">
     <!-- Static navbar -->
@@ -105,6 +132,52 @@
             <li><a id="login" href="{{url_for('web.login')}}"><span class="glyphicon glyphicon-log-in"></span> {{_('Login')}}</a></li>
             <li><a id="register" href="{{url_for('web.register')}}"><span class="glyphicon glyphicon-user"></span> {{_('Register')}}</a></li>
             {% endif %}
+
+            <!-- ═══ DİL SEÇİCİ ═══ -->
+            <li class="dropdown" id="locale-switcher">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                 aria-haspopup="true" aria-expanded="false"
+                 title="{{_('Language')}}">
+                {% set _cur = current_user.locale if current_user.is_authenticated else (request.cookies.get('locale', 'en')) %}
+                {% if   _cur == 'tr' %}<span class="locale-flag">TR</span>
+                {% elif _cur == 'ru' %}<span class="locale-flag">RU</span>
+                {% elif _cur == 'uk' %}<span class="locale-flag">UK</span>
+                {% else %}<span class="locale-flag">EN</span>
+                {% endif %}
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-header" style="font-size:0.78em;color:#999;padding:4px 14px 2px;">
+                  {{_('Interface Language')}}
+                </li>
+                <li {% if _cur == 'en' %}class="active"{% endif %}>
+                  <a href="{{ url_for('web.set_locale', locale_code='en') }}">
+                    🇬🇧&nbsp; English
+                    {% if _cur == 'en' %}<span class="glyphicon glyphicon-ok pull-right" style="font-size:0.85em;margin-top:2px;"></span>{% endif %}
+                  </a>
+                </li>
+                <li {% if _cur == 'tr' %}class="active"{% endif %}>
+                  <a href="{{ url_for('web.set_locale', locale_code='tr') }}">
+                    🇹🇷&nbsp; Türkçe
+                    {% if _cur == 'tr' %}<span class="glyphicon glyphicon-ok pull-right" style="font-size:0.85em;margin-top:2px;"></span>{% endif %}
+                  </a>
+                </li>
+                <li {% if _cur == 'ru' %}class="active"{% endif %}>
+                  <a href="{{ url_for('web.set_locale', locale_code='ru') }}">
+                    🇷🇺&nbsp; Русский
+                    {% if _cur == 'ru' %}<span class="glyphicon glyphicon-ok pull-right" style="font-size:0.85em;margin-top:2px;"></span>{% endif %}
+                  </a>
+                </li>
+                <li {% if _cur == 'uk' %}class="active"{% endif %}>
+                  <a href="{{ url_for('web.set_locale', locale_code='uk') }}">
+                    🇺🇦&nbsp; Українська
+                    {% if _cur == 'uk' %}<span class="glyphicon glyphicon-ok pull-right" style="font-size:0.85em;margin-top:2px;"></span>{% endif %}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- ═══════════════════ -->
+
           </ul>
         </div><!--/.nav-collapse -->
       </div>
