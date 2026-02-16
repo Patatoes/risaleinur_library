@@ -48,6 +48,51 @@
         color: #333;
         font-weight: 600;
       }
+
+      /* ═══ MOBİL DİL SEÇİCİ ═══ */
+      #mobile-locale-switcher {
+        display: inline-block;
+        float: right;
+        margin-top: 6px;
+        margin-right: 8px;
+      }
+      #mobile-locale-switcher > a {
+        display: inline-block;
+        padding: 4px 6px;
+        line-height: 1;
+        text-decoration: none;
+      }
+      #mobile-locale-switcher .locale-flag {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        background: #1a6fce;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        vertical-align: middle;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+      }
+      #mobile-locale-switcher .dropdown-menu {
+        min-width: 175px;
+        right: 0;
+        left: auto;
+      }
+      #mobile-locale-switcher .dropdown-menu li.active > a {
+        background-color: #f5f5f5;
+        color: #333;
+        font-weight: 600;
+      }
+      /* Masaüstünde gizle (768px ve üstü) */
+      @media (min-width: 768px) {
+        #mobile-locale-switcher { display: none !important; }
+      }
+      /* Navbar collapse içindeki dil seçiciyi mobilde gizle */
+      @media (max-width: 767px) {
+        #locale-switcher { display: none !important; }
+      }
+      /* ══════════════════════ */
     </style>
   </head>
   <body class="{{ page }} {{ bodyClass }}{% if g.current_theme == 1 %} blur{% endif %}" data-text="{{_('Home')}}" data-textback="{{_('Back')}}">
@@ -61,6 +106,46 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+
+          <!-- ═══ MOBİL DİL SEÇİCİ — her zaman görünür ═══ -->
+          <div id="mobile-locale-switcher" class="dropdown">
+            {% set _cur = current_user.locale if current_user.is_authenticated else (request.cookies.get('locale', 'en')) %}
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false"
+               title="{{_('Language')}}">
+              {% if   _cur == 'tr' %}<span class="locale-flag">TR</span>
+              {% elif _cur == 'ru' %}<span class="locale-flag">RU</span>
+              {% elif _cur == 'uk' %}<span class="locale-flag">UK</span>
+              {% else %}<span class="locale-flag">EN</span>
+              {% endif %}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="dropdown-header" style="font-size:0.78em;color:#999;padding:4px 14px 2px;">
+                {{_('Interface Language')}}
+              </li>
+              <li {% if _cur == 'en' %}class="active"{% endif %}>
+                <a href="{{ url_for('web.set_locale', locale_code='en') }}">🇬🇧&nbsp; English
+                  {% if _cur == 'en' %}<span class="glyphicon glyphicon-ok pull-right" style="font-size:0.85em;margin-top:2px;"></span>{% endif %}
+                </a>
+              </li>
+              <li {% if _cur == 'tr' %}class="active"{% endif %}>
+                <a href="{{ url_for('web.set_locale', locale_code='tr') }}">🇹🇷&nbsp; Türkçe
+                  {% if _cur == 'tr' %}<span class="glyphicon glyphicon-ok pull-right" style="font-size:0.85em;margin-top:2px;"></span>{% endif %}
+                </a>
+              </li>
+              <li {% if _cur == 'ru' %}class="active"{% endif %}>
+                <a href="{{ url_for('web.set_locale', locale_code='ru') }}">🇷🇺&nbsp; Русский
+                  {% if _cur == 'ru' %}<span class="glyphicon glyphicon-ok pull-right" style="font-size:0.85em;margin-top:2px;"></span>{% endif %}
+                </a>
+              </li>
+              <li {% if _cur == 'uk' %}class="active"{% endif %}>
+                <a href="{{ url_for('web.set_locale', locale_code='uk') }}">🇺🇦&nbsp; Українська
+                  {% if _cur == 'uk' %}<span class="glyphicon glyphicon-ok pull-right" style="font-size:0.85em;margin-top:2px;"></span>{% endif %}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- ══════════════════════════════════════════════ -->
           <a class="navbar-brand" style="width: 200px; height: auto;" href="{{url_for('web.index')}}">
     <img src="{{ url_for('static', filename='img/logo.png') }}"></a>
         </div>
