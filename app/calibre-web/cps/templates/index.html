@@ -1,6 +1,18 @@
 {% import 'image.html' as image %}
 {% extends "layout.html" %}
 {% block body %}
+
+<!-- Guest Recent Books (localStorage) -->
+<div id="guest-last-read" class="discover last-read-books" style="display:none;">
+  <h2 class="title">{{_('Recently Read Books')}}</h2>
+  <div class="row display-flex" id="guest-books-container"></div>
+</div>
+<script>
+  window.CALIBRE_IS_GUEST = {{ 'true' if not current_user.is_authenticated else 'false' }};
+</script>
+<script src="{{ url_for('static', filename='js/tracker.js') }}"></script>
+<hr>
+
 {% if last_read_books %}
 <div class="discover last-read-books">
   <h2 class="title">{{_('Recently Read Books')}}</h2>

@@ -434,6 +434,7 @@ def render_books_list(data, sort_param, book_id, page):
                                                                 db.Series)
         # --- YENİ EKLENEN KISIM: Son Okunan 10 Kitap ---
         last_read_books = []
+        last_read_title = None  # Initialize to avoid UnboundLocalError
         if current_user.is_authenticated:
             # 1. ADIM: 'ub' (Kullanıcı Veritabanı) içinden kullanıcının bookmarklarını çekiyoruz.
             # Bookmark ID'sine göre tersten sıralayıp (desc) en son eklenen 10 tanesini alıyoruz.
@@ -1654,7 +1655,10 @@ def read_book(book_id, book_format):
                                                              ub.Bookmark.format == book_format.upper())).first()
     if book_format.lower() == "epub" or book_format.lower() == "kepub":
         log.debug("Start [k]epub reader for %d", book_id)
-        return render_title_template('read.html', bookid=book_id, title=book.title, bookmark=bookmark,
+        # Get author names for guest tracking
+        author = ", ".join([a.name for a in book.authors]) if book.authors else "Unknown"
+        return render_title_template('read.html', bookid=book_id, title=book.title, 
+                                     author=author, bookmark=bookmark,
                                      book_format=book_format)
     elif book_format.lower() == "pdf":
         log.debug("Start pdf reader for %d", book_id)

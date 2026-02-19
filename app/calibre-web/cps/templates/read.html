@@ -695,5 +695,20 @@
             }, 500);
         });
     </script>
+
+    <!-- Guest Reading Tracker -->
+    <script>
+      window.CALIBRE_IS_GUEST = {{ 'true' if not current_user.is_authenticated else 'false' }};
+    </script>
+    <script src="{{ url_for('static', filename='js/tracker.js') }}"></script>
+    <script>
+      if (window.CalibreGuestTracker) {
+        CalibreGuestTracker.trackBookOpen({
+          id: {{ bookid }},
+          title: {{ title | tojson }},
+          author: {{ author | tojson }}
+        });
+      }
+    </script>
 </body>
 </html>
