@@ -456,6 +456,11 @@ def render_books_list(data, sort_param, book_id, page):
                 books_dict = {book.id: book for book in books_query}
                 last_read_books = [books_dict[bid] for bid in book_ids if bid in books_dict]
                 last_read_title = _('Recently Read Books')
+            else:
+                books_dict = {}
+                last_read_books = []
+                last_read_title = None
+
         # ------------------------------------------------
         return render_title_template('index.html', random=random, entries=entries, pagination=pagination,
                                      title=_("Books"), page=website, order=order[1], 
